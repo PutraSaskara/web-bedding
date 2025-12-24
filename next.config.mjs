@@ -1,16 +1,27 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Tambahkan objek ini untuk konfigurasi gambar
   images: {
-    // Domain yang diizinkan untuk di-load oleh next/image
     remotePatterns: [
+      // 1. Izinkan gambar dari Backend Localhost
       {
         protocol: 'http',
         hostname: 'localhost',
-        port: '5000', // PENTING: Tentukan port backend Anda
-        pathname: '/uploads/**', // Izinkan akses ke semua path di bawah /uploads
+        port: '5000',
+        pathname: '/uploads/**',
       },
-      // Anda bisa menambahkan domain lain di sini jika ada CDN atau staging server
+      // 2. Izinkan gambar dummy dari Google (yang dipakai di layout Our Story/Home)
+      {
+        protocol: 'http',
+        hostname: 'googleusercontent.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'googleusercontent.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+      },
     ],
   },
 };

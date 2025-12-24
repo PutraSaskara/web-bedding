@@ -2,8 +2,11 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import Image from 'next/image';
+import useCartStore from '../../../../store/useCartStore'; // <--- Import Store
 
 export default function ProductView({ product }) {
+  const addToCart = useCartStore((state) => state.addToCart); // <--- Ambil Action
+
   // 1. Parsing Variants
   const variants = Array.isArray(product.variants) 
     ? product.variants 
@@ -19,9 +22,9 @@ export default function ProductView({ product }) {
   const [selectedSize, setSelectedSize] = useState(null); 
   const [quantity, setQuantity] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showToast, setShowToast] = useState(false);
 
   // --- LOGIC LIGHTBOX GALLERY ---
-  
   const allImages = useMemo(() => {
     const imgs = [product.banner_image];
     variants.forEach(v => {
@@ -68,7 +71,6 @@ export default function ProductView({ product }) {
   }, [isModalOpen, currentImageIndex]);
 
   // --- LOGIC PRODUK UTAMA ---
-
   const handleVariantChange = (variant) => {
     setSelectedVariant(variant);
     setSelectedSize(null);
@@ -88,6 +90,38 @@ export default function ProductView({ product }) {
   const isOutOfStock = currentStock === 0;
   const canAddToCart = selectedVariant && selectedVariant.sizes.length > 0 ? !!selectedSize : !isOutOfStock;
 
+  // --- 2. FUNGSI HANDLE SHARE (BARU) ---
+ const handleShare = async () => {
+    const url = window.location.href;
+
+    // 1. Coba Native Share (HP Android/iOS)
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: product.name,
+          text: `Lihat ${product.name} yang nyaman ini!`,
+          url: url,
+        });
+        return; // Jika sukses share native, stop.
+      } catch (err) {
+        // Jika user batal/cancel, tidak perlu error, lanjut aja.
+        if (err.name !== 'AbortError') console.error('Share error:', err);
+      }
+    }
+
+    // 2. Fallback: Copy to Clipboard (PC/Laptop)
+    try {
+      await navigator.clipboard.writeText(url);
+      
+      // Trigger Toast Notification
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 3000); // Hilang dalam 3 detik
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  };
+  // -------------------------------------
+
   return (
     <>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
@@ -99,17 +133,10 @@ export default function ProductView({ product }) {
             onClick={() => setIsModalOpen(true)}
           >
             {activeImage ? (
-              <Image
-                src={activeImage}
-                alt={product.name}
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-                priority
-              />
+              <Image src={activeImage} alt={product.name} fill className="object-cover transition-transform duration-500 group-hover:scale-105" priority />
             ) : (
                <div className="flex items-center justify-center h-full text-text-soft">No Image</div>
             )}
-            
             <div className="absolute top-4 right-4 bg-white/80 p-2 rounded-full backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
                <span className="material-symbols-outlined text-text-main">zoom_in</span>
             </div>
@@ -131,10 +158,22 @@ export default function ProductView({ product }) {
         </div>
 
         {/* --- RIGHT: PRODUCT INFO --- */}
+        <div className="flex flex-col justify-center relative"> {/* Tambahkan relative disini */}
         <div className="flex flex-col justify-center">
           <span className="text-sm font-bold text-primary uppercase tracking-wider mb-2">
             {product.category_name || 'Collection'}
           </span>
+          {/* --- 3. TOMBOL SHARE (BARU) --- */}
+             {/* TOMBOL SHARE YANG CLEAN */}
+             <button 
+                onClick={handleShare}
+                className="group flex items-center gap-2 px-3 py-1.5 rounded-full hover:bg-gray-100 transition-all text-text-soft hover:text-text-main"
+                title="Bagikan Produk"
+             >
+                <span className="text-xs font-bold hidden group-hover:block transition-all">Share</span>
+                <span className="material-symbols-outlined text-[20px]">ios_share</span>
+             </button>
+             </div>
           <h1 className="text-3xl md:text-4xl font-black text-text-main mb-4 leading-tight">
             {product.name}
           </h1>
@@ -147,6 +186,23 @@ export default function ProductView({ product }) {
           <div className="prose prose-sm text-text-soft mb-8">
             <p>{product.description}</p>
           </div>
+
+            {/* ========================================= */}
+      {/* 🚀 TOAST NOTIFICATION COMPONENT (POPUP) */}
+      {/* ========================================= */}
+      {/* Muncul di tengah bawah layar, fixed position */}
+      <div 
+        className={`fixed bottom-10 left-1/2 -translate-x-1/2 z-[150] transition-all duration-300 transform ${
+            showToast ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
+        }`}
+      >
+        <div className="bg-gray-900 text-white px-6 py-3 rounded-full shadow-2xl flex items-center gap-3 min-w-[200px] justify-center backdrop-blur-sm bg-opacity-90">
+           <div className="bg-green-500 rounded-full p-0.5">
+             <span className="material-symbols-outlined text-base text-white font-bold">check</span>
+           </div>
+           <span className="font-medium text-sm">Link berhasil disalin!</span>
+        </div>
+      </div>
 
           <div className="space-y-6">
             {/* Color Selector */}
@@ -181,7 +237,6 @@ export default function ProductView({ product }) {
                       <span className="text-xs text-text-soft font-medium cursor-pointer underline hover:text-primary">Size Guide</span>
                   </div>
                   
-                  {/* GRID SIZE BUTTONS */}
                   <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
                       {selectedVariant.sizes.map((s, idx) => {
                           const isAvailable = s.stock > 0;
@@ -202,8 +257,6 @@ export default function ProductView({ product }) {
                                   `}
                               >
                                   {s.size}
-                                  
-                                  {/* --- INI FITUR YANG DIMINTA (Badge Stock) --- */}
                                   {isAvailable && isSelected && (
                                     <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full border-2 border-white shadow-sm z-10 animate-in fade-in zoom-in duration-200">
                                         {s.stock}
@@ -238,6 +291,7 @@ export default function ProductView({ product }) {
               </div>
               <button 
                 disabled={!canAddToCart}
+                onClick={() => addToCart(product, quantity, selectedVariant, selectedSize)} // <--- TRIGGER ZUSTAND
                 className={`flex-1 h-14 rounded-xl font-bold text-lg shadow-float transition-all flex items-center justify-center gap-2 ${
                   !canAddToCart ? 'bg-gray-200 text-gray-400 cursor-not-allowed shadow-none' : 'bg-primary text-white hover:bg-primary-dark hover:-translate-y-1'
                 }`}
@@ -248,6 +302,8 @@ export default function ProductView({ product }) {
           </div>
         </div>
       </div>
+
+      
 
       {/* --- MODAL / LIGHTBOX --- */}
       {isModalOpen && (
@@ -275,13 +331,7 @@ export default function ProductView({ product }) {
                 className="relative w-full h-full max-w-7xl max-h-[90vh] flex items-center justify-center select-none"
                 onClick={(e) => e.stopPropagation()}
             >
-                 <Image
-                    src={activeImage}
-                    alt="Zoom"
-                    fill
-                    className="object-contain"
-                    quality={100}
-                 />
+                 <Image src={activeImage} alt="Zoom" fill className="object-contain" quality={100} />
             </div>
 
             {allImages.length > 1 && (
@@ -298,6 +348,9 @@ export default function ProductView({ product }) {
             </div>
         </div>
       )}
+
+    
     </>
   );
 }
+

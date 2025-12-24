@@ -75,21 +75,6 @@ export default async function ProductDetailPage({ params }) {
 
   return (
     <div className="bg-background-light min-h-screen font-display text-text-main pb-20">
-      
-      {/* Navbar Placeholder (Agar konsisten dengan layout) */}
-      <nav className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-[#f4f2f0]">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
-           <Link href="/" className="flex items-center gap-2 text-text-main cursor-pointer hover:opacity-80 transition-opacity">
-              <span className="material-symbols-outlined text-3xl text-primary">bed</span>
-              <h2 className="text-xl font-bold tracking-tight">Nyamann</h2>
-           </Link>
-           <div className="flex gap-6 items-center">
-             <Link href="/shop" className="text-sm font-medium text-primary">Shop</Link>
-             <Link href="#" className="text-sm font-medium text-text-main hover:text-primary transition-colors">Journal</Link>
-           </div>
-        </div>
-      </nav>
-
       <main className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
         {/* Breadcrumbs Navigation */}

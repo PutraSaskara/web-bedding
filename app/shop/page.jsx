@@ -50,7 +50,7 @@ async function getPublicProducts(search, category, page) {
         return product;
     });
 
-    return { data: productsList, pagination: responseJson.pagination || {} };
+    return { data: productsList, pagination: responseJson.pagination || {}, suggestion: responseJson.suggestion || null };
 
   } catch (e) {
     console.error("Gagal fetch produk:", e);
@@ -71,25 +71,10 @@ export default async function ShopPage({ searchParams }) {
     getPublicProducts(search, category, page)
   ]);
 
-  const { data: products, pagination } = productResult;
+const { data: products, pagination, suggestion } = productResult;
 
   return (
     <div className="bg-background-light min-h-screen font-display text-text-main">
-      
-      {/* Navbar (Placeholder - Sebaiknya di Layout) */}
-      <nav className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-[#f4f2f0]">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
-           <Link href="/" className="flex items-center gap-2 text-text-main cursor-pointer hover:opacity-80 transition-opacity">
-              <span className="material-symbols-outlined text-3xl text-primary">bed</span>
-              <h2 className="text-xl font-bold tracking-tight">Nyamann</h2>
-           </Link>
-           <div className="flex gap-6 items-center">
-             <Link href="/shop" className="text-sm font-medium text-primary">Shop</Link>
-             <Link href="#" className="text-sm font-medium text-text-main hover:text-primary transition-colors">Journal</Link>
-           </div>
-        </div>
-      </nav>
-
       <main className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-10 pb-24">
         
         {/* Page Title */}
@@ -103,20 +88,42 @@ export default async function ShopPage({ searchParams }) {
         </div>
 
         {/* Controls (Search & Filter) */}
-        <ShopControls categories={categories} />
+        {/* Controls (Search & Filter) */}
+        <ShopControls 
+          categories={categories} 
+          initialSearch={search}     // <--- Tambahkan ini
+          initialCategory={category} // <--- Tambahkan ini
+        />
 
         {/* Product Grid */}
         {products.length === 0 ? (
            <div className="flex flex-col items-center justify-center py-20 text-center bg-white rounded-2xl shadow-soft border border-white">
-             <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mb-4">
-                <span className="material-symbols-outlined text-4xl text-gray-300">search_off</span>
+          <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mb-4">
+             <span className="material-symbols-outlined text-4xl text-gray-300">search_off</span>
+          </div>
+          
+          <h3 className="text-xl font-bold text-text-main">Produk tidak ditemukan</h3>
+          
+          {/* --- FITUR SUGGESTION --- */}
+          {suggestion ? (
+             <div className="mt-2 text-lg">
+                <p className="text-text-soft">Apakah maksud Anda:</p>
+                <Link 
+                   href={`/shop?search=${encodeURIComponent(suggestion)}`}
+                   className="text-primary font-bold text-xl hover:underline mt-1 block"
+                >
+                   "{suggestion}"
+                </Link>
              </div>
-             <h3 className="text-xl font-bold text-text-main">Produk tidak ditemukan</h3>
+          ) : (
              <p className="text-text-soft mt-1">Coba ganti kata kunci atau filter kategori Anda.</p>
-             <Link href="/shop" className="mt-6 text-primary font-bold hover:underline flex items-center gap-1">
-                Reset Filter <span className="material-symbols-outlined text-sm">refresh</span>
-             </Link>
-           </div>
+          )}
+          {/* ------------------------ */}
+
+          <Link href="/shop" className="mt-6 text-gray-500 font-bold hover:text-text-main hover:underline flex items-center gap-1">
+             Reset Filter <span className="material-symbols-outlined text-sm">refresh</span>
+          </Link>
+       </div>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">
             {products.map((product) => (
