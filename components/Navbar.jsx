@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation'; // Import Router
 import NavbarCartButton from './NavbarCartButton';
 
@@ -37,11 +38,14 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-16 sm:h-20">
             
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 text-text-main dark:text-white group cursor-pointer">
-              <div className="size-8 text-primary">
-                <span className="material-symbols-outlined text-3xl">bed</span>
-              </div>
-              <h2 className="text-xl font-bold tracking-tight">Nyamann</h2>
+            <Link href="/" className="flex items-center text-text-main dark:text-white group cursor-pointer">
+              <Image 
+                src="/logo1.png" 
+                alt="Nyamann Logo" 
+                width={80} 
+                height={80} 
+                className="md:w-20 md:h-20 w-12 h-12 object-contain"
+              />
             </Link>
 
             {/* Desktop Nav Links */}

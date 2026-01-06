@@ -50,7 +50,7 @@ export default function OurStoryPage() {
                     Rooted in Comfort, <br/> Inspired by Nature.
                 </h1>
                 <p className="text-lg md:text-xl text-text-soft leading-relaxed">
-                    Kami percaya bahwa istirahat bukanlah kemewahan, melainkan kebutuhan. Nyamann hadir untuk mengembalikan kualitas tidur Anda melalui sentuhan alam.
+                    Kami percaya bahwa istirahat bukanlah kemewahan, melainkan kebutuhan. Ameskara sprei bed and linen hadir untuk mengembalikan kualitas tidur Anda melalui sentuhan alam.
                 </p>
             </div>
         </section>
@@ -84,7 +84,7 @@ export default function OurStoryPage() {
                         Di tengah hiruk pikuk kehidupan modern, kami menyadari bahwa kamar tidur seringkali menjadi tempat terakhir yang diperhatikan. Sprei yang panas, bahan sintetis yang kasar, dan desain yang membosankan membuat tidur menjadi sekadar rutinitas.
                     </p>
                     <p className="text-text-soft leading-relaxed">
-                        <strong className="text-text-main">Nyamann</strong> lahir di Bali, terinspirasi oleh konsep <em>"Slow Living"</em>. Kami ingin membawa ketenangan suasana liburan ke dalam kamar tidur Anda setiap hari. Nama "Nyamann" sendiri diambil dari kata "Nyaman", janji sederhana kami untuk Anda.
+                        <strong className="text-text-main">Ameskara sprei bed and linen</strong> lahir di Bali, terinspirasi oleh konsep <em>"Slow Living"</em>. Kami ingin membawa ketenangan suasana liburan ke dalam kamar tidur Anda setiap hari. Nama "Nyamann" sendiri diambil dari kata "Nyaman", janji sederhana kami untuk Anda.
                     </p>
                 </div>
             </div>

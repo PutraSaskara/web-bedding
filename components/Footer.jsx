@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Footer() {
   return (
@@ -7,9 +8,14 @@ export default function Footer() {
         
         {/* --- LEFT: BRAND & SOCIAL MEDIA --- */}
         <div className="max-w-md">
-          <div className="flex items-center gap-2 mb-6">
-            <span className="material-symbols-outlined text-3xl text-primary">bed</span>
-            <span className="text-2xl font-bold">Nyamann</span>
+          <div className="mb-6">
+            <Image 
+              src="/logo1.png" 
+              alt="Nyamann Logo" 
+              width={128} 
+              height={128} 
+              className="w-32 h-32 object-contain"
+            />
           </div>
           <p className="text-gray-400 mb-8 leading-relaxed">
             Menghadirkan kenyamanan tidur terbaik dengan bahan linen organik berkualitas tinggi. Ciptakan tempat istirahat impian Anda bersama kami.
@@ -59,7 +65,7 @@ export default function Footer() {
 
       {/* --- BOTTOM --- */}
       <div className="max-w-[1440px] mx-auto mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
-        <p>© 2024 Nyamann Bedding. All rights reserved.</p>
+        <p>© 2024 Ameskara sprei bed and linen. All rights reserved.</p>
         <div className="flex gap-6">
           <Link href="#" className="hover:text-white">Privacy Policy</Link>
           <Link href="#" className="hover:text-white">Terms of Service</Link>
