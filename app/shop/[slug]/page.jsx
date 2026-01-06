@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import ProductView from './components/ProductView';
+import ProductTabs from './components/ProductTabs';
 
 // --- Fetch Detail Produk ---
 async function getProductDetail(slug) {
@@ -91,25 +92,7 @@ export default async function ProductDetailPage({ params }) {
         <ProductView product={product} />
 
         {/* --- DETAILS TABS / INFO (Static Content for Aesthetic) --- */}
-        <div className="mt-24 max-w-4xl mx-auto">
-            <div className="flex justify-center border-b border-gray-200 mb-8">
-                <button className="px-6 pb-4 border-b-2 border-primary text-primary font-bold text-sm tracking-wide transition-all">DETAILS</button>
-                <button className="px-6 pb-4 border-b-2 border-transparent text-text-soft hover:text-text-main font-medium text-sm tracking-wide transition-all">CARE GUIDE</button>
-                <button className="px-6 pb-4 border-b-2 border-transparent text-text-soft hover:text-text-main font-medium text-sm tracking-wide transition-all">SHIPPING</button>
-            </div>
-            
-            <div className="prose prose-stone mx-auto text-text-soft leading-relaxed">
-                <p>
-                    Experience the luxury of our signature linen. Sourced from the finest European flax and stone-washed for immediate softness, this collection is designed to bring effortless comfort to your bedroom. Breathable, durable, and naturally hypoallergenic.
-                </p>
-                <ul className="list-disc pl-5 space-y-2 mt-4 marker:text-primary">
-                    <li>100% European Flax Linen</li>
-                    <li>Stone-washed for softness</li>
-                    <li>OEKO-TEX® Certified (Free from harmful chemicals)</li>
-                    <li>Includes: 1 Duvet Cover, 2 Pillowcases</li>
-                </ul>
-            </div>
-        </div>
+        <ProductTabs />
 
         {/* --- RELATED PRODUCTS --- */}
         <div className="mt-32 border-t border-gray-200 pt-16">
