@@ -1,9 +1,20 @@
 import Link from "next/link";
 import Image from "next/image";
 
+// Metadata yang dioptimalkan untuk SEO dan social sharing
 export const metadata = {
-  title: "Our Story | Nyamann Bedding",
-  description: "The journey behind Nyamann Bedding. Sustainable comfort, rooted in nature.",
+  title: "Cerita Kami", // Akan menjadi "Cerita Kami | Ameskara Sprei"
+  description: "Perjalanan Ameskara Sprei berawal dari Bali, terinspirasi konsep 'Slow Living' untuk membawa ketenangan dan kenyamanan premium ke kamar tidur Anda.",
+  // Metadata untuk social sharing (Open Graph)
+  openGraph: {
+    title: "Cerita Kami | Ameskara Sprei",
+    description: "Perjalanan Ameskara Sprei berawal dari Bali, terinspirasi konsep 'Slow Living' untuk membawa ketenangan dan kenyamanan premium ke kamar tidur Anda.",
+    // Menggunakan gambar spesifik untuk halaman ini
+    images: [{
+      url: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDBV3l7I99e2VzFX6ZAqfVbbDOXsuz9UnrVtX38DyveEkqO5IThmVs0Xqm4whD0riQS0myJ2HDCb8FnvMxQZuk2_nO9f4czC_sNH6eH1hzdf_4BbqqP4hH1ONr3JMuAYx0CYj_z9aXvdjFVKYc9XAfA5kyP8eJ1yysL9KFbh4EYxlx_kKTMDOV9iioGrrps0kd6G0X9ERXpvAZfWxiTqRj0p6f4fWslg7yVvt1NdYleKw2-5RyVLncr5epVY8yEQJjItq7ct462-pI',
+      alt: 'Detail kain premium Ameskara Sprei'
+    }],
+  }
 };
 
 export default function OurStoryPage() {
@@ -84,7 +95,7 @@ export default function OurStoryPage() {
                         Di tengah hiruk pikuk kehidupan modern, kami menyadari bahwa kamar tidur seringkali menjadi tempat terakhir yang diperhatikan. Sprei yang panas, bahan sintetis yang kasar, dan desain yang membosankan membuat tidur menjadi sekadar rutinitas.
                     </p>
                     <p className="text-text-soft leading-relaxed">
-                        <strong className="text-text-main">Ameskara sprei bed and linen</strong> lahir di Bali, terinspirasi oleh konsep <em>"Slow Living"</em>. Kami ingin membawa ketenangan suasana liburan ke dalam kamar tidur Anda setiap hari. Nama "Nyamann" sendiri diambil dari kata "Nyaman", janji sederhana kami untuk Anda.
+                        <strong className="text-text-main">Ameskara sprei bed and linen</strong> lahir di Bali, terinspirasi oleh konsep <em>&ldquo;Slow Living&rdquo;</em>. Kami ingin membawa ketenangan suasana liburan ke dalam kamar tidur Anda setiap hari.
                     </p>
                 </div>
             </div>
@@ -94,25 +105,30 @@ export default function OurStoryPage() {
         <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
             <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center">
                 <div className="space-y-6">
-                    <h2 className="text-3xl font-bold text-text-main">100% Linen Organik</h2>
+                    <h2 className="text-3xl font-bold text-text-main">Berkualitas & Nyaman</h2>
                     <p className="text-text-soft leading-relaxed">
-                        Kami tidak berkompromi soal bahan. Sprei kami terbuat dari 100% serat Flax Eropa pilihan yang diproses secara berkelanjutan. 
+                        Kami menghadirkan sprei dengan bahan pilihan dan teknologi terbaik untuk kenyamanan tidur optimal Anda.
                     </p>
                     <ul className="space-y-4 mt-4">
                         <li className="flex items-start gap-3">
                             <span className="material-symbols-outlined text-primary mt-1">check_circle</span>
-                            <span className="text-text-soft"><strong>Stone-Washed:</strong> Teknik pencucian khusus menggunakan batu apung untuk menghasilkan tekstur super lembut sejak pemakaian pertama.</span>
+                            <span className="text-text-soft"><strong>Bahan Premium:</strong> Terbuat dari kain microtex atau katun berkualitas yang halus, lembut, dan adem di kulit untuk kenyamanan maksimal.</span>
                         </li>
                         <li className="flex items-start gap-3">
                             <span className="material-symbols-outlined text-primary mt-1">check_circle</span>
-                            <span className="text-text-soft"><strong>Hypoallergenic:</strong> Aman untuk kulit sensitif dan bayi, anti bakteri alami, dan memiliki sirkulasi udara yang sangat baik.</span>
+                            <span className="text-text-soft"><strong>Printing Awet:</strong> Menggunakan teknologi disperse printing yang membuat warna tidak mudah luntur dan motif tetap cerah meski setelah dicuci berkali-kali.</span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                            <span className="material-symbols-outlined text-primary mt-1">check_circle</span>
+                            <span className="text-text-soft"><strong>Model Fitted Berkaret:</strong> Dirancang dengan karet di setiap sudut untuk pemasangan yang rapi, pas, dan tidak mudah melorot di kasur.</span>
                         </li>
                     </ul>
                 </div>
                 <div className="relative aspect-square bg-oatmeal rounded-2xl overflow-hidden shadow-soft">
+                     {/* Ganti dengan gambar sprei produk Anda */}
                      <Image 
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlnNivZ3MpYCCGKtoKEhH6DTzYqRD3CCR8FowveK84qNRInnjmpi80Xl5Y53CW076KdswiKVG6GDfn_eIC69zEKvnsklDaITRbtzRZFbC4E0o-WoEK7oEKD2uRBZsi--uhCdekmEVZRuhqo2VKK9KJv4SBYDutXkRzaYN9FG2xUSG8ae_lcD-06f5irrA493WYzWpDwgy6o38bF_Bl9tJTMKpap0sih6SNLDBk4X-I6-E7LLtbvbci5znWPwmYnrmh8zNS73t1PHI" 
-                        alt="Linen Texture" 
+                        src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?q=80&w=1000&auto=format&fit=crop" 
+                        alt="Sprei berkualitas dengan motif modern" 
                         fill 
                         className="object-cover"
                     />
@@ -123,36 +139,36 @@ export default function OurStoryPage() {
         {/* --- Values Grid --- */}
         <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-[1440px] mx-auto text-center">
             <div className="mb-16">
-                <h2 className="text-3xl font-bold text-text-main">Our Core Values</h2>
-                <p className="text-text-soft mt-2">Prinsip yang kami pegang dalam setiap helai benang.</p>
+                <h2 className="text-3xl font-bold text-text-main">Nilai-Nilai Kami</h2>
+                <p className="text-text-soft mt-2">Prinsip yang kami pegang dalam setiap produk yang kami buat.</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div className="p-8 bg-[#f4f2f0] rounded-2xl hover:-translate-y-2 transition-transform duration-300">
                     <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm text-primary">
-                        <span className="material-symbols-outlined text-3xl">eco</span>
+                        <span className="material-symbols-outlined text-3xl">comfort</span>
                     </div>
-                    <h3 className="text-xl font-bold mb-3">Sustainability First</h3>
+                    <h3 className="text-xl font-bold mb-3">Kenyamanan Utama</h3>
                     <p className="text-text-soft text-sm leading-relaxed">
-                        Kami menggunakan kemasan bebas plastik (cassava bag) dan memastikan proses produksi yang minim limbah.
+                        Kami memprioritaskan bahan yang lembut dan adem untuk memberikan pengalaman tidur terbaik setiap malam.
                     </p>
                 </div>
                 <div className="p-8 bg-[#f4f2f0] rounded-2xl hover:-translate-y-2 transition-transform duration-300">
                     <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm text-primary">
-                        <span className="material-symbols-outlined text-3xl">handshake</span>
+                        <span className="material-symbols-outlined text-3xl">palette</span>
                     </div>
-                    <h3 className="text-xl font-bold mb-3">Fair Trade</h3>
+                    <h3 className="text-xl font-bold mb-3">Kualitas Cetak Tinggi</h3>
                     <p className="text-text-soft text-sm leading-relaxed">
-                        Bekerja sama langsung dengan pengrajin lokal dengan upah yang adil dan lingkungan kerja yang aman.
+                        Teknologi printing terbaik untuk memastikan warna tetap cerah dan tidak luntur, dengan pilihan motif aesthetic yang beragam.
                     </p>
                 </div>
                 <div className="p-8 bg-[#f4f2f0] rounded-2xl hover:-translate-y-2 transition-transform duration-300">
                     <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm text-primary">
-                        <span className="material-symbols-outlined text-3xl">all_inclusive</span>
+                        <span className="material-symbols-outlined text-3xl">schedule</span>
                     </div>
-                    <h3 className="text-xl font-bold mb-3">Made to Last</h3>
+                    <h3 className="text-xl font-bold mb-3">Dibuat untuk Bertahan</h3>
                     <p className="text-text-soft text-sm leading-relaxed">
-                        Produk kami didesain untuk bertahan bertahun-tahun, bukan sekadar tren musiman yang cepat rusak.
+                        Produk kami tahan lama, tidak mudah berbulu, dan didesain untuk penggunaan jangka panjang dengan perawatan mudah.
                     </p>
                 </div>
             </div>

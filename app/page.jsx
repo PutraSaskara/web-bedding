@@ -40,16 +40,16 @@ export default async function Home() {
             
             <div className="relative z-10 text-center max-w-2xl px-4 flex flex-col items-center gap-6">
               <h1 className="text-white text-4xl sm:text-5xl lg:text-7xl font-black leading-tight tracking-tight drop-shadow-md">
-                Make Your Bed <br/> Your Happy Place
+                  Desain yang Menawan, Kualitas yang Bertahan
               </h1>
               <p className="text-white/90 text-base sm:text-lg lg:text-xl font-medium max-w-lg drop-shadow-sm">
-                Linen ramah lingkungan yang dicuci lembut, semakin nyaman setiap kali tidur. Temukan seni hidup yang nyaman dan hangat.
+                  Nikmati kenyamanan sepenuhnya dengan sprei bahan premium yang nyaman di kulit, motif tidak mudah luntur, dan perawatan mudah untuk tidur yang lebih berkualitas setiap hari.
               </p>
               <Link href="/shop" className="mt-4 px-8 py-4 bg-primary hover:bg-primary-dark text-white rounded-xl font-bold text-lg shadow-float transition-all hover:shadow-lg hover:-translate-y-1 flex items-center gap-2">
-                Lihat Koleksi
-                <span className="material-symbols-outlined text-lg">arrow_forward</span>
+                  Wujudkan Kamar Impian
+                  <span className="material-symbols-outlined text-lg">arrow_forward</span>
               </Link>
-            </div>
+          </div>
           </div>
         </section>
 
@@ -160,37 +160,45 @@ export default async function Home() {
 
         {/* --- Value Props / Features --- */}
         <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-[1440px] mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            <div className="flex flex-col items-center text-center gap-4 p-6 rounded-2xl bg-white dark:bg-white/5 border border-transparent hover:border-primary/20 transition-all duration-300 hover:shadow-soft">
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2">
-                <span className="material-symbols-outlined text-3xl">grade</span>
-              </div>
-              <h3 className="text-xl font-bold text-text-main dark:text-white">Produk Berkualitas</h3>
-              <p className="text-text-soft dark:text-gray-400">Sprei dengan material premium, jahitan rapi, dan ketahanan warna yang terjaga untuk kenyamanan tidur maksimal.</p>
-            </div>
-            <div className="flex flex-col items-center text-center gap-4 p-6 rounded-2xl bg-white dark:bg-white/5 border border-transparent hover:border-primary/20 transition-all duration-300 hover:shadow-soft">
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2">
-                <span className="material-symbols-outlined text-3xl">cleaning_services</span>
-              </div>
-              <h3 className="text-xl font-bold text-text-main dark:text-white">Mudah Dibersihkan</h3>
-              <p className="text-text-soft dark:text-gray-400">Tahan luntur dan cepat kering, cukup dicuci dengan deterjen lembut dan dikeringkan dengan suhu rendah.</p>
-            </div>
-            <div className="flex flex-col items-center text-center gap-4 p-6 rounded-2xl bg-white dark:bg-white/5 border border-transparent hover:border-primary/20 transition-all duration-300 hover:shadow-soft">
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2">
-                <span className="material-symbols-outlined text-3xl">local_shipping</span>
-              </div>
-              <h3 className="text-xl font-bold text-text-main dark:text-white">Bisa Diantar Kurir</h3>
-              <p className="text-text-soft dark:text-gray-400">Pesanan dikirim langsung ke rumah Anda oleh kurir terpercaya dengan pengemasan aman dan rapi.</p>
-            </div>
-          </div>
-        </section>
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+    <div className="flex flex-col items-center text-center gap-4 p-6 rounded-2xl bg-white dark:bg-white/5 border border-transparent hover:border-primary/20 transition-all duration-300 hover:shadow-soft">
+      <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2">
+        <span className="material-symbols-outlined text-3xl">thermometer</span>
+      </div>
+      <h3 className="text-xl font-bold text-text-main dark:text-white">Bahan Lembut & Adem</h3>
+      <p className="text-text-soft dark:text-gray-400">
+        Terbuat dari kain microtex atau katun berkualitas yang halus dan nyaman di kulit, memberikan kenyamanan optimal sepanjang malam.
+      </p>
+    </div>
+    
+    <div className="flex flex-col items-center text-center gap-4 p-6 rounded-2xl bg-white dark:bg-white/5 border border-transparent hover:border-primary/20 transition-all duration-300 hover:shadow-soft">
+      <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2">
+        <span className="material-symbols-outlined text-3xl">palette</span>
+      </div>
+      <h3 className="text-xl font-bold text-text-main dark:text-white">Warna Awet & Tidak Luntur</h3>
+      <p className="text-text-soft dark:text-gray-400">
+        Menggunakan teknologi disperse printing yang membuat motif tetap cerah dan tidak mudah pudar meski setelah dicuci berkali-kali.
+      </p>
+    </div>
+    
+    <div className="flex flex-col items-center text-center gap-4 p-6 rounded-2xl bg-white dark:bg-white/5 border border-transparent hover:border-primary/20 transition-all duration-300 hover:shadow-soft">
+      <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2">
+        <span className="material-symbols-outlined text-3xl">fit_screen</span>
+      </div>
+      <h3 className="text-xl font-bold text-text-main dark:text-white">Model Berkaret yang Pas</h3>
+      <p className="text-text-soft dark:text-gray-400">
+        Desain fitted dengan karet di setiap sudut membuatnya selalu rapi dan pas menutupi kasur, tidak mudah melorot atau bergeser.
+      </p>
+    </div>
+  </div>
+</section>
 
         {/* --- Social Proof / Instagram Grid --- */}
         <section className="py-16 bg-white dark:bg-background-dark">
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-text-main dark:text-white text-3xl font-bold tracking-tight mb-3">As Seen In Your Homes</h2>
-              <p className="text-text-soft dark:text-gray-400">Join the cozy club and tag us @NyamannBedding</p>
+              <p className="text-text-soft dark:text-gray-400">Join the cozy club and tag us @ameskarasprei.id</p>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px] md:auto-rows-[300px]">
               <div className="relative group overflow-hidden rounded-xl row-span-2 col-span-2 md:col-span-2 md:row-span-2">

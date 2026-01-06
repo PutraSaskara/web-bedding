@@ -76,7 +76,7 @@ export default function ArticleRenderer({ content }) {
           case 'quote':
              return (
                  <blockquote key={index} className="border-l-4 border-primary pl-4 py-2 my-6 italic text-lg text-gray-700 bg-gray-50 rounded-r-lg">
-                     "{block.data.text}"
+                     &ldquo;{block.data.text}&rdquo;
                      {block.data.caption && <cite className="block text-sm text-gray-500 mt-2 not-italic">- {block.data.caption}</cite>}
                  </blockquote>
              );

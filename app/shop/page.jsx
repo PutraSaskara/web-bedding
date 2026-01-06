@@ -112,7 +112,7 @@ const { data: products, pagination, suggestion } = productResult;
                    href={`/shop?search=${encodeURIComponent(suggestion)}`}
                    className="text-primary font-bold text-xl hover:underline mt-1 block"
                 >
-                   "{suggestion}"
+                   &ldquo;{suggestion}&rdquo;
                 </Link>
              </div>
           ) : (

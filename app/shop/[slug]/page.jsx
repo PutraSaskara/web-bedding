@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import ProductView from './components/ProductView';
 import ProductTabs from './components/ProductTabs';
+import { sharedMetadata } from '../../shared-metadata';
 
 // --- Fetch Detail Produk ---
 async function getProductDetail(slug) {
@@ -43,20 +44,58 @@ async function getRelatedProducts() {
             next: { revalidate: 3600 } // Cache 1 jam agar ringan
         });
         const json = await res.json();
+        console.log("product", json.data)
         return json.data || [];
     } catch (e) { return []; }
 }
 
-console.log("data getProductDetail", getProductDetail);
-
 // --- Metadata SEO ---
 export async function generateMetadata({ params }) {
   const product = await getProductDetail(params.slug);
-  if (!product) return { title: 'Product Not Found' };
+
+  // Jika produk tidak ditemukan, berikan metadata default "Not Found"
+  if (!product) {
+    return {
+      title: 'Produk Tidak Ditemukan',
+      description: 'Maaf, produk yang Anda cari tidak ada atau telah dihapus.',
+    };
+  }
   
+  // Jika produk ditemukan, buat metadata yang kaya & dinamis
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskara.com';
+  const productUrl = `${siteUrl}/shop/${product.slug}`;
+  const productDescription = product.meta_description || product.description?.substring(0, 160) || sharedMetadata.description;
+  const productImages = product.banner_image ? [product.banner_image] : sharedMetadata.openGraph.images.map(img => img.url);
+
   return {
-    title: `${product.name} | Nyamann Bedding`,
-    description: product.meta_description || product.description?.substring(0, 160),
+    // Title akan otomatis menjadi "Nama Produk | Ameskara Sprei"
+    title: product.name, 
+    description: productDescription,
+    
+    // URL kanonis untuk menghindari duplikat konten di mata Google
+    alternates: {
+      canonical: productUrl,
+    },
+
+    // Metadata untuk social sharing (WhatsApp, Facebook, dll)
+    openGraph: {
+      ...sharedMetadata.openGraph, // Mewarisi pengaturan default
+      title: `${product.name} | Ameskara Sprei`,
+      description: productDescription,
+      url: productUrl,
+      images: productImages.map(imgUrl => ({
+        url: imgUrl,
+        alt: `Gambar produk ${product.name}`,
+      })),
+    },
+
+    // Metadata untuk Twitter Card
+    twitter: {
+      ...sharedMetadata.twitter, // Mewarisi pengaturan default
+      title: `${product.name} | Ameskara Sprei`,
+      description: productDescription,
+      images: productImages,
+    },
   };
 }
 
@@ -71,8 +110,6 @@ export default async function ProductDetailPage({ params }) {
   if (!product) {
     notFound(); // Redirect ke halaman 404 Next.js
   }
-
-  console.log("data product", product);
 
   return (
     <div className="bg-background-light min-h-screen font-display text-text-main pb-20">
