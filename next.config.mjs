@@ -26,6 +26,12 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'images.unsplash.com',
       },
+      // 3. Izinkan gambar dari URL production
+      {
+        protocol: 'https',
+        hostname: 'ameskarabed.saskaraputra.my.id',
+        pathname: '/uploads/**',
+      },
     ],
   },
 };
