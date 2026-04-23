@@ -11,35 +11,56 @@ const ogImageUrl = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCQegTQD2
 export const sharedMetadata = {
   metadataBase: new URL(siteUrl),
   
-  // Menggunakan title dan template dari layout Anda
+  // Title template — semua halaman akan ikut format ini
   title: {
     template: '%s | Ameskara Sprei',
-    default: 'Ameskara sprei bed and linen',
+    default: 'Ameskara Sprei - Sprei & Bedcover Premium Berkualitas Tinggi',
   },
 
-  // Menggunakan deskripsi dari layout Anda
-  description: 'Sustainable, soft-washed linen bedding.',
+  // Deskripsi utama (target 150-160 karakter)
+  description: 'Ameskara menyediakan sprei, bedcover, dan perlengkapan tidur premium dengan bahan lembut, warna tidak mudah luntur, dan desain estetik untuk kenyamanan tidur Anda.',
 
   // Kata Kunci Utama untuk SEO
   keywords: [
-    'sprei', 'bedcover', 'sprei premium', 'sprei aesthetic', 'sprei katun', 
+    'sprei premium', 'bedcover', 'sprei aesthetic', 'sprei katun', 
     'sprei microtex', 'ameskara sprei', 'dekorasi kamar tidur', 'perlengkapan tidur',
-    'sprei bali', 'sprei tidak luntur', 'sprei adem', 'bed linen indonesia'
+    'sprei bali', 'sprei tidak luntur', 'sprei adem', 'bed linen indonesia',
+    'sprei murah berkualitas', 'sprei set lengkap', 'bedcover set',
+    'sprei fitted', 'bantal guling', 'sprei online', 'toko sprei online',
   ],
 
-  // Untuk Google dan search engine lainnya
+  // Robots directives
   robots: {
     index: true,
     follow: true,
+    'max-image-preview': 'large',
+    'max-snippet': -1,
+    'max-video-preview': -1,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+
+  // Verifikasi Google Search Console (ganti dengan kode asli Anda)
+  // verification: {
+  //   google: 'YOUR_GOOGLE_SITE_VERIFICATION_CODE',
+  // },
+
+  // Alternates & Canonical
+  alternates: {
+    canonical: siteUrl,
   },
 
   // Metadata untuk social media sharing (Open Graph)
   openGraph: {
     title: {
       template: '%s | Ameskara Sprei',
-      default: 'Ameskara sprei bed and linen',
+      default: 'Ameskara Sprei - Sprei & Bedcover Premium Berkualitas Tinggi',
     },
-    description: 'Sustainable, soft-washed linen bedding.',
+    description: 'Ameskara menyediakan sprei, bedcover, dan perlengkapan tidur premium dengan bahan lembut, warna tidak mudah luntur, dan desain estetik untuk kenyamanan tidur Anda.',
     siteName: 'Ameskara Sprei',
     url: siteUrl,
     images: [
@@ -47,7 +68,7 @@ export const sharedMetadata = {
         url: ogImageUrl,
         width: 1200,
         height: 630,
-        alt: 'Kamar tidur nyaman dengan sprei premium dari Ameskara',
+        alt: 'Koleksi sprei premium Ameskara - bahan lembut dan warna tahan lama',
       },
     ],
     locale: 'id_ID',
@@ -59,13 +80,13 @@ export const sharedMetadata = {
     card: 'summary_large_image',
     title: {
       template: '%s | Ameskara Sprei',
-      default: 'Ameskara sprei bed and linen',
+      default: 'Ameskara Sprei - Sprei & Bedcover Premium',
     },
-    description: 'Sustainable, soft-washed linen bedding.',
+    description: 'Sprei, bedcover, dan perlengkapan tidur premium dengan bahan lembut dan desain estetik.',
     images: [ogImageUrl],
   },
 
-  // Menggunakan konfigurasi ikon detail dari layout Anda
+  // Favicon & Icons
   icons: {
     icon: [
       { url: '/icons/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
@@ -76,4 +97,7 @@ export const sharedMetadata = {
     ],
     shortcut: ['/icons/favicon.ico'],
   },
+
+  // Kategori website
+  category: 'ecommerce',
 };

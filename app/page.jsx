@@ -1,6 +1,68 @@
 import Link from "next/link";
 import Image from "next/image";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskara.com';
+
+// SEO Metadata for Home Page
+export const metadata = {
+  title: 'Ameskara Sprei - Sprei & Bedcover Premium Berkualitas Tinggi',
+  description: 'Belanja sprei, bedcover, dan perlengkapan tidur premium dari Ameskara. Bahan lembut, warna tidak luntur, desain estetik. Gratis ongkir seluruh Indonesia.',
+  alternates: {
+    canonical: siteUrl,
+  },
+  openGraph: {
+    title: 'Ameskara Sprei - Sprei & Bedcover Premium Berkualitas Tinggi',
+    description: 'Belanja sprei, bedcover, dan perlengkapan tidur premium dari Ameskara. Bahan lembut, warna tidak luntur, desain estetik.',
+    url: siteUrl,
+    type: 'website',
+  },
+};
+
+// JSON-LD Structured Data
+function HomeJsonLd() {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebSite',
+        '@id': `${siteUrl}/#website`,
+        url: siteUrl,
+        name: 'Ameskara Sprei',
+        description: 'Sprei & Bedcover Premium Berkualitas Tinggi',
+        inLanguage: 'id-ID',
+        potentialAction: {
+          '@type': 'SearchAction',
+          target: {
+            '@type': 'EntryPoint',
+            urlTemplate: `${siteUrl}/shop?search={search_term_string}`,
+          },
+          'query-input': 'required name=search_term_string',
+        },
+      },
+      {
+        '@type': 'Organization',
+        '@id': `${siteUrl}/#organization`,
+        name: 'Ameskara Sprei',
+        url: siteUrl,
+        description: 'Toko sprei dan bedcover premium online. Bahan lembut, warna tahan lama, desain estetik.',
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Denpasar',
+          addressRegion: 'Bali',
+          addressCountry: 'ID',
+        },
+      },
+    ],
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
+  );
+}
+
 // --- FETCH DATA FUNCTION ---
 async function getFeaturedProducts() {
   const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -27,6 +89,7 @@ export default async function Home() {
 
   return (
     <div className="flex flex-col min-h-screen font-display text-text-main">
+      <HomeJsonLd />
       <main className="flex-grow">
         {/* --- Hero Section --- */}
         <section className="relative px-3 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-10 max-w-[1440px] mx-auto">

@@ -2,6 +2,22 @@ import Link from 'next/link';
 import Image from 'next/image';
 import ShopControls from './components/ShopControls';
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskara.com';
+
+export const metadata = {
+  title: 'Belanja Sprei & Bedcover Premium',
+  description: 'Jelajahi koleksi lengkap sprei, bedcover, bantal, dan guling premium dari Ameskara. Tersedia berbagai motif, warna, dan ukuran dengan bahan lembut berkualitas tinggi.',
+  alternates: {
+    canonical: `${siteUrl}/shop`,
+  },
+  openGraph: {
+    title: 'Belanja Sprei & Bedcover Premium | Ameskara Sprei',
+    description: 'Jelajahi koleksi lengkap sprei, bedcover, bantal, dan guling premium dari Ameskara.',
+    url: `${siteUrl}/shop`,
+    type: 'website',
+  },
+};
+
 // --- FETCH FUNCTIONS ---
 
 // 1. Fetch Kategori

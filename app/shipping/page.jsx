@@ -1,8 +1,18 @@
 import React from 'react';
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskara.com';
+
 export const metadata = {
-  title: 'Shipping Information - Ameskara Sprei',
-  description: 'Informasi pengiriman, kurir, dan estimasi waktu sampai produk Ameskara.',
+  title: 'Informasi Pengiriman',
+  description: 'Informasi lengkap tentang pengiriman produk Ameskara: jadwal pemrosesan, mitra logistik, estimasi waktu sampai, dan pelacakan pesanan ke seluruh Indonesia.',
+  alternates: {
+    canonical: `${siteUrl}/shipping`,
+  },
+  openGraph: {
+    title: 'Informasi Pengiriman | Ameskara Sprei',
+    description: 'Informasi lengkap tentang pengiriman produk Ameskara ke seluruh Indonesia.',
+    url: `${siteUrl}/shipping`,
+  },
 };
 
 export default function ShippingPage() {

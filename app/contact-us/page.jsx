@@ -1,9 +1,19 @@
 import React from 'react';
 import ContactForm from '../../components/ContactForm';
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskara.com';
+
 export const metadata = {
-  title: 'Contact Us - Ameskara Sprei',
-  description: 'Hubungi kami untuk pertanyaan seputar produk sprei dan bedcover Ameskara.',
+  title: 'Hubungi Kami',
+  description: 'Hubungi tim Ameskara Sprei untuk pertanyaan seputar produk, pesanan, atau kemitraan. Kami siap membantu Anda melalui email dan WhatsApp.',
+  alternates: {
+    canonical: `${siteUrl}/contact-us`,
+  },
+  openGraph: {
+    title: 'Hubungi Kami | Ameskara Sprei',
+    description: 'Hubungi tim Ameskara Sprei untuk pertanyaan seputar produk, pesanan, atau kemitraan.',
+    url: `${siteUrl}/contact-us`,
+  },
 };
 
 export default function ContactUsPage() {

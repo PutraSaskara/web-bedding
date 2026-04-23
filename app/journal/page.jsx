@@ -23,9 +23,19 @@ async function getArticles() {
   }
 }
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskara.com';
+
 export const metadata = {
-  title: "Journal | Nyamann Bedding",
-  description: "Tips tidur nyenyak, inspirasi dekorasi kamar, dan cerita tentang linen.",
+  title: "Journal - Tips Tidur & Inspirasi Dekorasi",
+  description: "Baca artikel tips tidur nyenyak, inspirasi dekorasi kamar tidur, dan panduan perawatan sprei dari Ameskara. Update rutin untuk kenyamanan tidur Anda.",
+  alternates: {
+    canonical: `${siteUrl}/journal`,
+  },
+  openGraph: {
+    title: 'Journal - Tips Tidur & Inspirasi Dekorasi | Ameskara Sprei',
+    description: 'Baca artikel tips tidur nyenyak, inspirasi dekorasi kamar tidur, dan panduan perawatan sprei dari Ameskara.',
+    url: `${siteUrl}/journal`,
+  },
 };
 
 export default async function JournalPage() {

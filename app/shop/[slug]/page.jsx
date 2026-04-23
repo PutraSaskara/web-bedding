@@ -111,8 +111,41 @@ export default async function ProductDetailPage({ params }) {
     notFound(); // Redirect ke halaman 404 Next.js
   }
 
+  // JSON-LD Product Structured Data
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskara.com';
+  const productJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.name,
+    description: product.description || '',
+    image: product.banner_image ? [product.banner_image] : [],
+    url: `${siteUrl}/shop/${product.slug}`,
+    brand: {
+      '@type': 'Brand',
+      name: 'Ameskara',
+    },
+    category: product.category_name || 'Sprei',
+    offers: {
+      '@type': 'Offer',
+      url: `${siteUrl}/shop/${product.slug}`,
+      priceCurrency: 'IDR',
+      price: product.price,
+      availability: product.stock > 0
+        ? 'https://schema.org/InStock'
+        : 'https://schema.org/OutOfStock',
+      seller: {
+        '@type': 'Organization',
+        name: 'Ameskara Sprei',
+      },
+    },
+  };
+
   return (
     <div className="bg-background-light min-h-screen font-display text-text-main pb-12 sm:pb-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
 
         {/* Breadcrumbs Navigation */}
