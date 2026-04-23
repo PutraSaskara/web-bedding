@@ -113,7 +113,7 @@ export default async function ProductDetailPage({ params }) {
 
   return (
     <div className="bg-background-light min-h-screen font-display text-text-main pb-12 sm:pb-20">
-      <main className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
 
         {/* Breadcrumbs Navigation */}
         {/* Mobile: Simple back link */}

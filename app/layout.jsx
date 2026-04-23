@@ -1,4 +1,5 @@
 import { Spline_Sans } from "next/font/google";
+import { Suspense } from "react";
 import "./globals.css";
 
 // Import Komponen Global
@@ -6,6 +7,7 @@ import Navbar from "../components/Navbar";       // <--- 1. Import Navbar
 import CartDrawer from "../components/CartDrawer";
 import FloatingCart from "../components/FloatingCart";
 import Footer from "../components/Footer";
+import PageLoadingBar from "../components/PageLoadingBar";
 import { sharedMetadata } from "./shared-metadata";
 const spline = Spline_Sans({ 
   subsets: ["latin"],
@@ -23,6 +25,11 @@ export default function RootLayout({ children }) {
       </head>
       <body className="bg-background-light dark:bg-background-dark font-display text-text-main antialiased selection:bg-primary selection:text-white">
         
+        {/* Loading Bar */}
+        <Suspense fallback={null}>
+          <PageLoadingBar />
+        </Suspense>
+
         {/* 2. Pasang Navbar Paling Atas */}
         <Navbar />
 

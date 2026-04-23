@@ -124,12 +124,12 @@ export default function ProductView({ product }) {
 
   return (
     <>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-16">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
         
         {/* --- LEFT: IMAGE GALLERY --- */}
         <div className="flex flex-col gap-3 sm:gap-4">
           <div 
-            className="relative aspect-square sm:aspect-[4/5] w-full bg-oatmeal rounded-xl sm:rounded-2xl overflow-hidden shadow-soft group cursor-zoom-in"
+            className="relative aspect-square w-full lg:max-h-[500px] bg-oatmeal rounded-xl sm:rounded-2xl overflow-hidden shadow-soft group cursor-zoom-in"
             onClick={() => setIsModalOpen(true)}
           >
             {activeImage ? (
