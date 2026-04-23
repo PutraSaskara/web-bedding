@@ -30,7 +30,7 @@ export default async function Home() {
       <main className="flex-grow">
         {/* --- Hero Section --- */}
         <section className="relative px-3 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-10 max-w-[1440px] mx-auto">
-          <div className="relative w-full rounded-2xl overflow-hidden min-h-[380px] sm:min-h-[500px] lg:min-h-[600px] flex items-center justify-center group">
+          <div className="relative w-full rounded-2xl overflow-hidden min-h-[300px] sm:min-h-[420px] lg:min-h-[520px] flex items-center justify-center group">
             <div 
               className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" 
               style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuAp4eCH8FxGGfQeYjogXl2NOQe55ycYfvwPfEcaA7XCPsl_nActcknwJY-2AxZrIgHGorP71HiaBoT3IMPe6G39gtkrwlGNarJ9APm9mD5NcM3MSji868FJCnFXuk9IitBIGpqYqQTlbTd8gPXu-l2UsBlJ7RhCyNU7pFGflYzk_tTZHGcoN1f79vztC5p-9B6Bqm9mSb4gnGoAHlhevu1R5n9CC-hE9_-wkpPISWO5HbgAZD1bCfxKj2zmlKhVEXPxMEE4CA8zyak")' }}
@@ -54,14 +54,14 @@ export default async function Home() {
         </section>
 
         {/* --- Shop By Color / Mood --- */}
-        <section className="py-10 sm:py-16 px-4 sm:px-6 lg:px-8 max-w-[1440px] mx-auto">
+        <section className="py-8 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-[1440px] mx-auto">
           <div className="text-center mb-8 sm:mb-12">
             <h2 className="text-text-main dark:text-white text-2xl sm:text-3xl font-bold tracking-tight mb-2 sm:mb-3">Shop by Mood</h2>
             <p className="text-text-soft dark:text-gray-400 text-sm sm:text-base">Temukan nada yang sempurna untuk tempat perlindungan Anda.</p>
           </div>
           <div className="grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-6 sm:gap-8 md:gap-12">
             <Link href="/shop?category=terracotta" className="group flex flex-col items-center gap-3 sm:gap-4 cursor-pointer">
-              <div className="w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full bg-terracotta relative overflow-hidden shadow-soft transition-transform duration-300 group-hover:scale-110 group-hover:shadow-lg ring-4 ring-transparent group-hover:ring-terracotta/30">
+              <div className="w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 rounded-full bg-terracotta relative overflow-hidden shadow-soft transition-transform duration-300 group-hover:scale-110 group-hover:shadow-lg ring-4 ring-transparent group-hover:ring-terracotta/30">
                 <div className="absolute inset-0 bg-gradient-to-tr from-black/10 to-transparent"></div>
               </div>
               <div className="text-center">
@@ -70,7 +70,7 @@ export default async function Home() {
               </div>
             </Link>
             <Link href="/shop?category=sage" className="group flex flex-col items-center gap-3 sm:gap-4 cursor-pointer">
-              <div className="w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full bg-sage relative overflow-hidden shadow-soft transition-transform duration-300 group-hover:scale-110 group-hover:shadow-lg ring-4 ring-transparent group-hover:ring-sage/30">
+              <div className="w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 rounded-full bg-sage relative overflow-hidden shadow-soft transition-transform duration-300 group-hover:scale-110 group-hover:shadow-lg ring-4 ring-transparent group-hover:ring-sage/30">
                 <div className="absolute inset-0 bg-gradient-to-tr from-black/10 to-transparent"></div>
               </div>
               <div className="text-center">
@@ -79,7 +79,7 @@ export default async function Home() {
               </div>
             </Link>
             <Link href="/shop?category=oatmeal" className="group flex flex-col items-center gap-3 sm:gap-4 cursor-pointer">
-              <div className="w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full bg-oatmeal relative overflow-hidden shadow-soft transition-transform duration-300 group-hover:scale-110 group-hover:shadow-lg ring-4 ring-transparent group-hover:ring-oatmeal/30">
+              <div className="w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 rounded-full bg-oatmeal relative overflow-hidden shadow-soft transition-transform duration-300 group-hover:scale-110 group-hover:shadow-lg ring-4 ring-transparent group-hover:ring-oatmeal/30">
                 <div className="absolute inset-0 bg-gradient-to-tr from-black/10 to-transparent"></div>
               </div>
               <div className="text-center">
@@ -88,7 +88,7 @@ export default async function Home() {
               </div>
             </Link>
             <Link href="/shop?category=mustard" className="group flex flex-col items-center gap-3 sm:gap-4 cursor-pointer">
-              <div className="w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full bg-mustard relative overflow-hidden shadow-soft transition-transform duration-300 group-hover:scale-110 group-hover:shadow-lg ring-4 ring-transparent group-hover:ring-mustard/30">
+              <div className="w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 rounded-full bg-mustard relative overflow-hidden shadow-soft transition-transform duration-300 group-hover:scale-110 group-hover:shadow-lg ring-4 ring-transparent group-hover:ring-mustard/30">
                 <div className="absolute inset-0 bg-gradient-to-tr from-black/10 to-transparent"></div>
               </div>
               <div className="text-center">
@@ -113,37 +113,34 @@ export default async function Home() {
               </Link>
             </div>
 
-            <div className="flex overflow-x-auto scrollbar-hide pb-8 sm:pb-12 pt-4 px-2 sm:px-4 -mx-2 sm:-mx-4 sm:mx-0 gap-4 sm:gap-8 snap-x snap-mandatory">
+            <div className="flex overflow-x-auto scrollbar-hide pb-4 sm:pb-8 pt-2 px-1 -mx-1 sm:mx-0 gap-2 sm:gap-4 snap-x snap-mandatory">
               {products.length > 0 ? (
                 products.map((product) => (
-                  <div key={product.id} className="min-w-[220px] sm:min-w-[280px] md:min-w-[320px] bg-white p-3 sm:p-4 pb-5 sm:pb-6 shadow-float rounded-sm polaroid-tilt transition-all duration-300 snap-center group">
-                    <Link href={`/shop/${product.slug}`} className="block">
-                      <div className="aspect-[4/5] w-full bg-gray-100 overflow-hidden mb-3 sm:mb-4 relative">
+                  <div key={product.id} className="min-w-[160px] sm:min-w-[200px] md:min-w-[220px] snap-center">
+                    <Link href={`/shop/${product.slug}`} className="block bg-white rounded-lg overflow-hidden border border-gray-100 hover:shadow-md transition-all duration-300 group">
+                      <div className="aspect-square w-full bg-gray-50 overflow-hidden relative">
                         {product.stock < 5 && product.stock > 0 && (
-                           <div className="absolute top-2 left-2 bg-primary text-white text-[10px] sm:text-xs font-bold px-2 py-1 rounded-sm z-10 uppercase">Low Stock</div>
+                           <div className="absolute top-1.5 left-1.5 bg-primary text-white text-[8px] font-bold px-1.5 py-0.5 rounded z-10">Sisa {product.stock}</div>
                         )}
                         {product.stock === 0 && (
-                           <div className="absolute top-2 left-2 bg-gray-800 text-white text-[10px] sm:text-xs font-bold px-2 py-1 rounded-sm z-10 uppercase">Sold Out</div>
+                           <div className="absolute top-1.5 left-1.5 bg-black/70 text-white text-[8px] font-bold px-1.5 py-0.5 rounded z-10 uppercase">Habis</div>
                         )}
                         {product.banner_image ? (
                           <Image 
                             src={product.banner_image}
                             alt={product.name}
-                            width={400}
-                            height={500}
-                            className="w-full h-full object-cover grayscale-[10%] group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110"
+                            width={300}
+                            height={300}
+                            className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 ${product.stock === 0 ? 'grayscale opacity-70' : ''}`}
                           />
                         ) : (
-                          <div className="w-full h-full flex items-center justify-center text-gray-300">
-                             <span className="material-symbols-outlined text-4xl">image</span>
+                          <div className="w-full h-full flex items-center justify-center text-gray-200">
+                             <span className="material-symbols-outlined text-3xl">image</span>
                           </div>
                         )}
-                        <button className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 bg-white text-text-main p-2.5 sm:p-3 rounded-full shadow-md opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:bg-primary hover:text-white z-20">
-                          <span className="material-symbols-outlined text-[18px] sm:text-[24px]">add_shopping_cart</span>
-                        </button>
                       </div>
-                      <div className="px-1 sm:px-2 text-center">
-                        <h3 className="text-base sm:text-xl font-bold text-text-main mb-1 line-clamp-1 group-hover:text-primary transition-colors">{product.name}</h3>
+                      <div className="p-2 sm:p-3">
+                        <h3 className="text-xs sm:text-sm text-text-main line-clamp-1 leading-snug mb-1 group-hover:text-primary transition-colors">{product.name}</h3>
                         <p className="text-primary font-bold text-sm sm:text-base">Rp {Math.floor(Number(product.price)).toLocaleString('id-ID')}</p>
                       </div>
                     </Link>
@@ -214,7 +211,7 @@ export default async function Home() {
               <h2 className="text-text-main dark:text-white text-2xl sm:text-3xl font-bold tracking-tight mb-2 sm:mb-3">As Seen In Your Homes</h2>
               <p className="text-text-soft dark:text-gray-400 text-sm sm:text-base">Join the cozy club and tag us @ameskarasprei.id</p>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4 auto-rows-[150px] sm:auto-rows-[200px] md:auto-rows-[300px]">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-1.5 sm:gap-3 auto-rows-[120px] sm:auto-rows-[180px] md:auto-rows-[250px]">
               <div className="relative group overflow-hidden rounded-lg sm:rounded-xl row-span-2 col-span-2 md:col-span-2 md:row-span-2">
                 <img className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQegTQD2FsuX7mGKrFx81pMj11kTf264Dvi4sb9Nu3PJx-ytkS7JHziIKdcFv89vORJvJXUMvJLHI9gR-kPIFjv1twO6H-X7-Qa5csBVKLYCstMIAWovXKKyzw93pUehBnMyMP9yz9ws5SdJ-pR2WvozwTRJE004xziZbKuuiQJRsHN3OZom70phJ902bPD0i2ZcF2tvBCrO7rosCRtaHuNySAjpFqYhUF2yAvq4HXdI3dokAp1SWBvhZ63xeL1pAplJv8QhIW9IM" alt="IG 1" />
                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">

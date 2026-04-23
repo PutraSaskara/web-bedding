@@ -125,21 +125,21 @@ const { data: products, pagination, suggestion } = productResult;
           </Link>
        </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 sm:gap-x-6 gap-y-6 sm:gap-y-10">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 sm:gap-4">
             {products.map((product) => (
-              <Link href={`/shop/${product.slug}`} key={product.id} className="group cursor-pointer">
-                {/* Image Container */}
-                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-xl sm:rounded-2xl bg-oatmeal shadow-soft group-hover:shadow-float transition-all duration-500 ease-out">
+              <Link href={`/shop/${product.slug}`} key={product.id} className="group cursor-pointer bg-white rounded-lg sm:rounded-xl overflow-hidden border border-gray-100 hover:shadow-md transition-all duration-300">
+                {/* Image Container — Square like Shopee */}
+                <div className="relative aspect-square w-full overflow-hidden bg-gray-50">
                   
                   {/* Badge Stok */}
                   {product.stock === 0 && (
-                    <div className="absolute top-2 left-2 sm:top-3 sm:left-3 bg-text-main text-white text-[8px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-sm z-20 uppercase tracking-wide">
-                      Sold Out
+                    <div className="absolute top-1.5 left-1.5 sm:top-2 sm:left-2 bg-black/70 text-white text-[8px] sm:text-[10px] font-bold px-1.5 py-0.5 rounded z-20 uppercase">
+                      Habis
                     </div>
                   )}
                   {product.stock > 0 && product.stock < 5 && (
-                    <div className="absolute top-2 left-2 sm:top-3 sm:left-3 bg-primary text-white text-[8px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-sm z-20 uppercase tracking-wide">
-                      Low Stock
+                    <div className="absolute top-1.5 left-1.5 sm:top-2 sm:left-2 bg-primary text-white text-[8px] sm:text-[10px] font-bold px-1.5 py-0.5 rounded z-20">
+                      Sisa {product.stock}
                     </div>
                   )}
 
@@ -148,31 +148,19 @@ const { data: products, pagination, suggestion } = productResult;
                         src={product.banner_image}
                         alt={product.name}
                         fill
-                        className={`object-cover object-center transition-transform duration-700 group-hover:scale-110 ${product.stock === 0 ? 'grayscale' : ''}`}
-                        sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                        className={`object-cover object-center transition-transform duration-500 group-hover:scale-105 ${product.stock === 0 ? 'grayscale opacity-70' : ''}`}
+                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
                      />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-text-soft/30">
-                      <span className="material-symbols-outlined text-4xl sm:text-5xl">image</span>
+                    <div className="w-full h-full flex items-center justify-center text-gray-200">
+                      <span className="material-symbols-outlined text-3xl sm:text-4xl">image</span>
                     </div>
-                  )}
-
-                  {/* Add to Cart Overlay Button */}
-                  {product.stock > 0 && (
-                    <button className="absolute bottom-2 right-2 sm:bottom-4 sm:right-4 bg-white text-text-main w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center shadow-lg opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:bg-primary hover:text-white z-20">
-                        <span className="material-symbols-outlined text-[16px] sm:text-[20px]">add_shopping_cart</span>
-                    </button>
                   )}
                 </div>
 
-                {/* Product Info */}
-                <div className="mt-2.5 sm:mt-4 space-y-1 sm:space-y-1.5">
-                   {/* Kategori Kecil */}
-                   <span className="text-[9px] sm:text-[10px] uppercase tracking-wider font-bold text-text-soft/70 block">
-                      {product.category_name || 'General'}
-                   </span>
-                   
-                   <h3 className="text-sm sm:text-lg font-bold text-text-main group-hover:text-primary transition-colors line-clamp-1">
+                {/* Product Info — Compact like Shopee */}
+                <div className="p-2 sm:p-3">
+                   <h3 className="text-xs sm:text-sm text-text-main line-clamp-1 leading-snug mb-1 group-hover:text-primary transition-colors">
                       {product.name}
                    </h3>
                    
@@ -180,22 +168,11 @@ const { data: products, pagination, suggestion } = productResult;
                      Rp {Math.floor(product.price).toLocaleString('id-ID')}
                    </p>
 
-                   {/* Varian Colors Indicator */}
+                   {/* Variants count */}
                    {product.variants && product.variants.length > 0 && (
-                     <div className="flex items-center gap-1 pt-0.5">
-                        {product.variants.slice(0, 3).map((v, i) => (
-                          <div 
-                             key={i} 
-                             className="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full border border-white shadow-sm bg-gray-300 ring-1 ring-black/5" 
-                             title={v.color}
-                          ></div>
-                        ))}
-                        {product.variants.length > 3 && (
-                          <span className="text-[10px] sm:text-xs text-text-soft font-medium ml-0.5">
-                            +{product.variants.length - 3}
-                          </span>
-                        )}
-                     </div>
+                     <p className="text-[10px] sm:text-xs text-text-soft mt-1">
+                       {product.variants.length} warna
+                     </p>
                    )}
                 </div>
               </Link>
