@@ -124,12 +124,12 @@ export default function ProductView({ product }) {
 
   return (
     <>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-16">
         
         {/* --- LEFT: IMAGE GALLERY --- */}
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-3 sm:gap-4">
           <div 
-            className="relative aspect-[4/5] w-full bg-oatmeal rounded-2xl overflow-hidden shadow-soft group cursor-zoom-in"
+            className="relative aspect-square sm:aspect-[4/5] w-full bg-oatmeal rounded-xl sm:rounded-2xl overflow-hidden shadow-soft group cursor-zoom-in"
             onClick={() => setIsModalOpen(true)}
           >
             {activeImage ? (
@@ -137,17 +137,29 @@ export default function ProductView({ product }) {
             ) : (
                <div className="flex items-center justify-center h-full text-text-soft">No Image</div>
             )}
-            <div className="absolute top-4 right-4 bg-white/80 p-2 rounded-full backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-               <span className="material-symbols-outlined text-text-main">zoom_in</span>
+            <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-white/80 p-1.5 sm:p-2 rounded-full backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+               <span className="material-symbols-outlined text-text-main text-[18px] sm:text-[24px]">zoom_in</span>
             </div>
+
+            {/* Mobile swipe indicator */}
+            {allImages.length > 1 && (
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 sm:hidden">
+                {allImages.map((img, idx) => (
+                  <div 
+                    key={idx} 
+                    className={`w-1.5 h-1.5 rounded-full transition-all ${activeImage === img ? 'bg-white w-4' : 'bg-white/50'}`}
+                  />
+                ))}
+              </div>
+            )}
           </div>
 
-          <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+          <div className="flex gap-2 sm:gap-4 overflow-x-auto pb-2 scrollbar-hide">
              {allImages.map((img, idx) => (
                 <button 
                   key={idx}
                   onClick={() => setActiveImage(img)}
-                  className={`relative w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden border-2 transition-all ${
+                  className={`relative w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 rounded-lg overflow-hidden border-2 transition-all ${
                     activeImage === img ? 'border-primary' : 'border-transparent opacity-70 hover:opacity-100'
                   }`}
                 >
@@ -160,7 +172,7 @@ export default function ProductView({ product }) {
         {/* --- RIGHT: PRODUCT INFO --- */}
         <div className="flex flex-col justify-center relative"> {/* Tambahkan relative disini */}
         <div className="flex flex-col justify-center">
-          <span className="text-sm font-bold text-primary uppercase tracking-wider mb-2">
+          <span className="text-xs sm:text-sm font-bold text-primary uppercase tracking-wider mb-1 sm:mb-2">
             {product.category_name || 'Collection'}
           </span>
           {/* --- 3. TOMBOL SHARE (BARU) --- */}
@@ -171,21 +183,18 @@ export default function ProductView({ product }) {
                 title="Bagikan Produk"
              >
                 <span className="text-xs font-bold hidden group-hover:block transition-all">Share</span>
-                <span className="material-symbols-outlined text-[20px]">ios_share</span>
+                <span className="material-symbols-outlined text-[18px] sm:text-[20px]">ios_share</span>
              </button>
              </div>
-          <h1 className="text-3xl md:text-4xl font-black text-text-main mb-4 leading-tight">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-text-main mb-2 sm:mb-4 leading-tight">
             {product.name}
           </h1>
-          <div className="flex items-center gap-6 mb-6">
-            <p className="text-2xl font-medium text-text-main">
-              Rp {price.toLocaleString('id-ID')}
+          <div className="flex items-center gap-6 mb-4 sm:mb-6">
+            <p className="text-xl sm:text-2xl font-medium text-text-main">
+              Rp {Math.floor(price).toLocaleString('id-ID')}
             </p>
           </div>
-          <div className="h-px w-full bg-gray-200 mb-8"></div>
-          <div className="prose prose-sm text-text-soft mb-8">
-            <p>{product.description}</p>
-          </div>
+          <div className="h-px w-full bg-gray-200 mb-6 sm:mb-8"></div>
 
             {/* ========================================= */}
       {/* 🚀 TOAST NOTIFICATION COMPONENT (POPUP) */}
@@ -196,27 +205,27 @@ export default function ProductView({ product }) {
             showToast ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
         }`}
       >
-        <div className="bg-gray-900 text-white px-6 py-3 rounded-full shadow-2xl flex items-center gap-3 min-w-[200px] justify-center backdrop-blur-sm bg-opacity-90">
+        <div className="bg-gray-900 text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-full shadow-2xl flex items-center gap-2 sm:gap-3 min-w-[180px] sm:min-w-[200px] justify-center backdrop-blur-sm bg-opacity-90">
            <div className="bg-green-500 rounded-full p-0.5">
-             <span className="material-symbols-outlined text-base text-white font-bold">check</span>
+             <span className="material-symbols-outlined text-sm sm:text-base text-white font-bold">check</span>
            </div>
-           <span className="font-medium text-sm">Link berhasil disalin!</span>
+           <span className="font-medium text-xs sm:text-sm">Link berhasil disalin!</span>
         </div>
       </div>
 
-          <div className="space-y-6">
+          <div className="space-y-5 sm:space-y-6">
             {/* Color Selector */}
             {variants.length > 0 && (
               <div>
-                <label className="block text-sm font-bold text-text-main mb-3">
+                <label className="block text-xs sm:text-sm font-bold text-text-main mb-2 sm:mb-3">
                   Select Color: <span className="font-normal text-text-soft">{selectedVariant?.color}</span>
                 </label>
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-2 sm:gap-3">
                   {variants.map((v, i) => (
                     <button
                       key={i}
                       onClick={() => handleVariantChange(v)}
-                      className={`px-4 py-2 rounded-lg border text-sm font-medium transition-all ${
+                      className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg border text-xs sm:text-sm font-medium transition-all ${
                         selectedVariant === v
                           ? 'border-primary bg-primary/5 text-primary ring-1 ring-primary'
                           : 'border-gray-200 text-text-main hover:border-gray-400'
@@ -232,12 +241,12 @@ export default function ProductView({ product }) {
             {/* Size Selector */}
             {selectedVariant && selectedVariant.sizes && selectedVariant.sizes.length > 0 && (
                <div>
-                  <div className="flex justify-between items-center mb-3">
-                      <label className="text-sm font-bold text-text-main">Select Size</label>
-                      <span className="text-xs text-text-soft font-medium cursor-pointer underline hover:text-primary">Size Guide</span>
+                  <div className="flex justify-between items-center mb-2 sm:mb-3">
+                      <label className="text-xs sm:text-sm font-bold text-text-main">Select Size</label>
+                      <span className="text-[10px] sm:text-xs text-text-soft font-medium cursor-pointer underline hover:text-primary">Size Guide</span>
                   </div>
                   
-                  <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
+                  <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 sm:gap-3">
                       {selectedVariant.sizes.map((s, idx) => {
                           const isAvailable = s.stock > 0;
                           const isSelected = selectedSize && selectedSize.size === s.size;
@@ -247,7 +256,7 @@ export default function ProductView({ product }) {
                                   onClick={() => handleSizeChange(s)}
                                   disabled={!isAvailable}
                                   className={`
-                                      py-3 rounded-lg border text-sm font-bold transition-all relative
+                                      py-2.5 sm:py-3 rounded-lg border text-xs sm:text-sm font-bold transition-all relative
                                       ${!isAvailable 
                                           ? 'border-gray-100 bg-gray-50 text-gray-300 cursor-not-allowed decoration-slice line-through' 
                                           : isSelected
@@ -258,7 +267,7 @@ export default function ProductView({ product }) {
                               >
                                   {s.size}
                                   {isAvailable && isSelected && (
-                                    <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full border-2 border-white shadow-sm z-10 animate-in fade-in zoom-in duration-200">
+                                    <span className="absolute -top-1.5 -right-1.5 sm:-top-2 sm:-right-2 bg-red-500 text-white text-[8px] sm:text-[10px] w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center rounded-full border-2 border-white shadow-sm z-10 animate-in fade-in zoom-in duration-200">
                                         {s.stock}
                                     </span>
                                   )}
@@ -266,24 +275,24 @@ export default function ProductView({ product }) {
                           );
                       })}
                   </div>
-                  {!selectedSize && <p className="text-xs text-red-500 mt-2 italic">* Please select a size</p>}
+                  {!selectedSize && <p className="text-[10px] sm:text-xs text-red-500 mt-1.5 sm:mt-2 italic">* Please select a size</p>}
                </div>
             )}
 
             {/* Quantity & Add to Cart */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <div className="flex items-center border border-gray-300 rounded-xl h-14 w-full sm:w-32">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2 sm:pt-4">
+              <div className="flex items-center border border-gray-300 rounded-xl h-12 sm:h-14 w-full sm:w-32">
                 <button 
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="w-10 h-full flex items-center justify-center text-text-main hover:bg-gray-100 rounded-l-xl"
+                  className="w-10 h-full flex items-center justify-center text-text-main hover:bg-gray-100 rounded-l-xl text-lg"
                   disabled={!canAddToCart}
                 >
                   -
                 </button>
-                <input type="text" value={quantity} readOnly className="flex-1 w-full text-center border-none focus:ring-0 text-text-main font-bold bg-transparent" />
+                <input type="text" value={quantity} readOnly className="flex-1 w-full text-center border-none focus:ring-0 text-text-main font-bold bg-transparent text-sm sm:text-base" />
                 <button 
                   onClick={() => setQuantity(quantity + 1)}
-                  className="w-10 h-full flex items-center justify-center text-text-main hover:bg-gray-100 rounded-r-xl"
+                  className="w-10 h-full flex items-center justify-center text-text-main hover:bg-gray-100 rounded-r-xl text-lg"
                   disabled={!canAddToCart || quantity >= currentStock}
                 >
                   +
@@ -292,11 +301,11 @@ export default function ProductView({ product }) {
               <button 
                 disabled={!canAddToCart}
                 onClick={() => addToCart(product, quantity, selectedVariant, selectedSize)} // <--- TRIGGER ZUSTAND
-                className={`flex-1 h-14 rounded-xl font-bold text-lg shadow-float transition-all flex items-center justify-center gap-2 ${
+                className={`flex-1 h-12 sm:h-14 rounded-xl font-bold text-base sm:text-lg shadow-float transition-all flex items-center justify-center gap-2 active:scale-95 ${
                   !canAddToCart ? 'bg-gray-200 text-gray-400 cursor-not-allowed shadow-none' : 'bg-primary text-white hover:bg-primary-dark hover:-translate-y-1'
                 }`}
               >
-                Add to Cart {canAddToCart && <span className="material-symbols-outlined">shopping_bag</span>}
+                Add to Cart {canAddToCart && <span className="material-symbols-outlined text-[20px] sm:text-[24px]">shopping_bag</span>}
               </button>
             </div>
           </div>
@@ -308,22 +317,22 @@ export default function ProductView({ product }) {
       {/* --- MODAL / LIGHTBOX --- */}
       {isModalOpen && (
         <div 
-            className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm flex items-center justify-center p-4 transition-opacity duration-300"
+            className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4 transition-opacity duration-300"
             onClick={() => setIsModalOpen(false)}
         >
             <button 
-                className="absolute top-6 right-6 text-white/70 hover:text-white bg-black/50 hover:bg-black/80 rounded-full p-2 transition-all z-[110]"
+                className="absolute top-4 right-4 sm:top-6 sm:right-6 text-white/70 hover:text-white bg-black/50 hover:bg-black/80 rounded-full p-1.5 sm:p-2 transition-all z-[110]"
                 onClick={() => setIsModalOpen(false)}
             >
-                <span className="material-symbols-outlined text-3xl">close</span>
+                <span className="material-symbols-outlined text-2xl sm:text-3xl">close</span>
             </button>
 
             {allImages.length > 1 && (
                 <button 
-                    className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-white/70 hover:text-white bg-black/30 hover:bg-black/60 rounded-full p-3 transition-all z-[110]"
+                    className="absolute left-2 sm:left-4 md:left-8 top-1/2 -translate-y-1/2 text-white/70 hover:text-white bg-black/30 hover:bg-black/60 rounded-full p-2 sm:p-3 transition-all z-[110]"
                     onClick={handlePrevImage}
                 >
-                    <span className="material-symbols-outlined text-3xl md:text-4xl">chevron_left</span>
+                    <span className="material-symbols-outlined text-2xl sm:text-3xl md:text-4xl">chevron_left</span>
                 </button>
             )}
 
@@ -336,14 +345,14 @@ export default function ProductView({ product }) {
 
             {allImages.length > 1 && (
                 <button 
-                    className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-white/70 hover:text-white bg-black/30 hover:bg-black/60 rounded-full p-3 transition-all z-[110]"
+                    className="absolute right-2 sm:right-4 md:right-8 top-1/2 -translate-y-1/2 text-white/70 hover:text-white bg-black/30 hover:bg-black/60 rounded-full p-2 sm:p-3 transition-all z-[110]"
                     onClick={handleNextImage}
                 >
-                    <span className="material-symbols-outlined text-3xl md:text-4xl">chevron_right</span>
+                    <span className="material-symbols-outlined text-2xl sm:text-3xl md:text-4xl">chevron_right</span>
                 </button>
             )}
 
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white font-medium bg-black/50 px-4 py-1 rounded-full text-sm">
+            <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 text-white font-medium bg-black/50 px-3 sm:px-4 py-1 rounded-full text-xs sm:text-sm">
                 {currentImageIndex + 1} / {allImages.length}
             </div>
         </div>

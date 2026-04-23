@@ -32,45 +32,45 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-      <form className="space-y-4" onSubmit={handleSubmit}>
+    <div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 shadow-sm">
+      <form className="space-y-3 sm:space-y-4" onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
+          <label htmlFor="name" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
           <input 
             type="text" 
             id="name" 
             value={formData.name}
             onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-gray-900 focus:border-gray-900 outline-none transition-colors" 
+            className="w-full px-3 sm:px-4 py-2 sm:py-2.5 border border-gray-300 rounded-md focus:ring-gray-900 focus:border-gray-900 outline-none transition-colors text-sm sm:text-base" 
             placeholder="Nama Anda" 
             required
           />
         </div>
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+          <label htmlFor="email" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Email</label>
           <input 
             type="email" 
             id="email" 
             value={formData.email}
             onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-gray-900 focus:border-gray-900 outline-none transition-colors" 
+            className="w-full px-3 sm:px-4 py-2 sm:py-2.5 border border-gray-300 rounded-md focus:ring-gray-900 focus:border-gray-900 outline-none transition-colors text-sm sm:text-base" 
             placeholder="email@anda.com" 
             required
           />
         </div>
         <div>
-          <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Pesan</label>
+          <label htmlFor="message" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Pesan</label>
           <textarea 
             id="message" 
             rows={4} 
             value={formData.message}
             onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-gray-900 focus:border-gray-900 outline-none transition-colors" 
+            className="w-full px-3 sm:px-4 py-2 sm:py-2.5 border border-gray-300 rounded-md focus:ring-gray-900 focus:border-gray-900 outline-none transition-colors text-sm sm:text-base" 
             placeholder="Tulis pesan Anda di sini..."
             required
           ></textarea>
         </div>
-        <button type="submit" className="w-full bg-gray-900 text-white py-2.5 px-4 rounded-md hover:bg-gray-800 transition-colors font-medium">
+        <button type="submit" className="w-full bg-gray-900 text-white py-2.5 sm:py-3 px-4 rounded-md hover:bg-gray-800 transition-colors font-medium text-sm sm:text-base active:scale-[0.98]">
           Kirim Pesan via WhatsApp
         </button>
       </form>

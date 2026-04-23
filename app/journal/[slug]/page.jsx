@@ -58,22 +58,22 @@ export default async function ArticleDetailPage({ params }) {
     <div className="bg-white min-h-screen font-display text-text-main">
       <main>
           {/* Article Header */}
-          <header className="max-w-4xl mx-auto px-4 pt-16 pb-8 text-center">
-              <div className="flex items-center justify-center gap-3 mb-6">
-                  <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+          <header className="max-w-4xl mx-auto px-4 pt-8 sm:pt-16 pb-4 sm:pb-8 text-center">
+              <div className="flex items-center justify-center gap-2 sm:gap-3 mb-4 sm:mb-6 flex-wrap">
+                  <span className="bg-primary/10 text-primary px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider">
                       {article.category_name || 'Blog'}
                   </span>
-                  <span className="text-text-soft text-sm font-medium">
+                  <span className="text-text-soft text-xs sm:text-sm font-medium">
                       {formatDate(article.created_at)}
                   </span>
               </div>
               
-              <h1 className="text-3xl md:text-5xl font-black text-text-main leading-tight mb-8">
+              <h1 className="text-2xl sm:text-3xl md:text-5xl font-black text-text-main leading-tight mb-6 sm:mb-8 px-2 sm:px-0">
                   {article.title}
               </h1>
 
               {/* Cover Image */}
-              <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-oatmeal shadow-soft">
+              <div className="relative w-full aspect-[16/10] sm:aspect-video rounded-xl sm:rounded-2xl overflow-hidden bg-oatmeal shadow-soft">
                   {article.thumbnail ? (
                       <Image 
                         src={article.thumbnail} 
@@ -89,14 +89,14 @@ export default async function ArticleDetailPage({ params }) {
           </header>
 
           {/* Article Content */}
-          <article className="max-w-3xl mx-auto px-4 pb-20">
+          <article className="max-w-3xl mx-auto px-4 pb-12 sm:pb-20">
               {/* Render Blocks from Editor.js */}
               <ArticleRenderer content={article.content} />
           </article>
 
          {/* Share / Footer Section */}
-          <div className="max-w-3xl mx-auto px-4 pb-24 border-t border-gray-100 pt-8 text-center">
-              <p className="text-text-soft italic mb-6">Suka dengan artikel ini? Bagikan yuk!</p>
+          <div className="max-w-3xl mx-auto px-4 pb-16 sm:pb-24 border-t border-gray-100 pt-6 sm:pt-8 text-center">
+              <p className="text-text-soft italic mb-4 sm:mb-6 text-sm sm:text-base">Suka dengan artikel ini? Bagikan yuk!</p>
               
               {/* --- 2. GANTI DUMMY BUTTONS DENGAN KOMPONEN INI --- */}
               <ArticleShare title={article.title} />

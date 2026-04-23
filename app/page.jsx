@@ -29,8 +29,8 @@ export default async function Home() {
     <div className="flex flex-col min-h-screen font-display text-text-main">
       <main className="flex-grow">
         {/* --- Hero Section --- */}
-        <section className="relative px-4 sm:px-6 lg:px-8 py-6 lg:py-10 max-w-[1440px] mx-auto">
-          <div className="relative w-full rounded-2xl overflow-hidden min-h-[500px] lg:min-h-[600px] flex items-center justify-center group">
+        <section className="relative px-3 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-10 max-w-[1440px] mx-auto">
+          <div className="relative w-full rounded-2xl overflow-hidden min-h-[380px] sm:min-h-[500px] lg:min-h-[600px] flex items-center justify-center group">
             <div 
               className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" 
               style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuAp4eCH8FxGGfQeYjogXl2NOQe55ycYfvwPfEcaA7XCPsl_nActcknwJY-2AxZrIgHGorP71HiaBoT3IMPe6G39gtkrwlGNarJ9APm9mD5NcM3MSji868FJCnFXuk9IitBIGpqYqQTlbTd8gPXu-l2UsBlJ7RhCyNU7pFGflYzk_tTZHGcoN1f79vztC5p-9B6Bqm9mSb4gnGoAHlhevu1R5n9CC-hE9_-wkpPISWO5HbgAZD1bCfxKj2zmlKhVEXPxMEE4CA8zyak")' }}
@@ -38,14 +38,14 @@ export default async function Home() {
             <div className="absolute inset-0 bg-black/20 mix-blend-multiply"></div>
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
             
-            <div className="relative z-10 text-center max-w-2xl px-4 flex flex-col items-center gap-6">
-              <h1 className="text-white text-4xl sm:text-5xl lg:text-7xl font-black leading-tight tracking-tight drop-shadow-md">
+            <div className="relative z-10 text-center max-w-2xl px-4 sm:px-6 flex flex-col items-center gap-4 sm:gap-6">
+              <h1 className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black leading-tight tracking-tight drop-shadow-md">
                   Desain yang Menawan, Kualitas yang Bertahan
               </h1>
-              <p className="text-white/90 text-base sm:text-lg lg:text-xl font-medium max-w-lg drop-shadow-sm">
+              <p className="text-white/90 text-sm sm:text-base lg:text-xl font-medium max-w-lg drop-shadow-sm">
                   Nikmati kenyamanan sepenuhnya dengan sprei bahan premium yang nyaman di kulit, motif tidak mudah luntur, dan perawatan mudah untuk tidur yang lebih berkualitas setiap hari.
               </p>
-              <Link href="/shop" className="mt-4 px-8 py-4 bg-primary hover:bg-primary-dark text-white rounded-xl font-bold text-lg shadow-float transition-all hover:shadow-lg hover:-translate-y-1 flex items-center gap-2">
+              <Link href="/shop" className="mt-2 sm:mt-4 px-6 sm:px-8 py-3 sm:py-4 bg-primary hover:bg-primary-dark text-white rounded-xl font-bold text-base sm:text-lg shadow-float transition-all hover:shadow-lg hover:-translate-y-1 flex items-center gap-2">
                   Wujudkan Kamar Impian
                   <span className="material-symbols-outlined text-lg">arrow_forward</span>
               </Link>
@@ -54,58 +54,58 @@ export default async function Home() {
         </section>
 
         {/* --- Shop By Color / Mood --- */}
-        <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-[1440px] mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-text-main dark:text-white text-3xl font-bold tracking-tight mb-3">Shop by Mood</h2>
-            <p className="text-text-soft dark:text-gray-400">Temukan nada yang sempurna untuk tempat perlindungan Anda.</p>
+        <section className="py-10 sm:py-16 px-4 sm:px-6 lg:px-8 max-w-[1440px] mx-auto">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-text-main dark:text-white text-2xl sm:text-3xl font-bold tracking-tight mb-2 sm:mb-3">Shop by Mood</h2>
+            <p className="text-text-soft dark:text-gray-400 text-sm sm:text-base">Temukan nada yang sempurna untuk tempat perlindungan Anda.</p>
           </div>
-          <div className="flex flex-wrap justify-center gap-8 md:gap-12">
-            <Link href="/shop?category=terracotta" className="group flex flex-col items-center gap-4 cursor-pointer">
-              <div className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-terracotta relative overflow-hidden shadow-soft transition-transform duration-300 group-hover:scale-110 group-hover:shadow-lg ring-4 ring-transparent group-hover:ring-terracotta/30">
+          <div className="grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-6 sm:gap-8 md:gap-12">
+            <Link href="/shop?category=terracotta" className="group flex flex-col items-center gap-3 sm:gap-4 cursor-pointer">
+              <div className="w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full bg-terracotta relative overflow-hidden shadow-soft transition-transform duration-300 group-hover:scale-110 group-hover:shadow-lg ring-4 ring-transparent group-hover:ring-terracotta/30">
                 <div className="absolute inset-0 bg-gradient-to-tr from-black/10 to-transparent"></div>
               </div>
               <div className="text-center">
-                <h3 className="font-bold text-text-main dark:text-white text-lg">Terracotta</h3>
-                <span className="text-sm text-text-soft dark:text-gray-400">Warmth & Energy</span>
+                <h3 className="font-bold text-text-main dark:text-white text-base sm:text-lg">Terracotta</h3>
+                <span className="text-xs sm:text-sm text-text-soft dark:text-gray-400">Warmth & Energy</span>
               </div>
             </Link>
-            <Link href="/shop?category=sage" className="group flex flex-col items-center gap-4 cursor-pointer">
-              <div className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-sage relative overflow-hidden shadow-soft transition-transform duration-300 group-hover:scale-110 group-hover:shadow-lg ring-4 ring-transparent group-hover:ring-sage/30">
+            <Link href="/shop?category=sage" className="group flex flex-col items-center gap-3 sm:gap-4 cursor-pointer">
+              <div className="w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full bg-sage relative overflow-hidden shadow-soft transition-transform duration-300 group-hover:scale-110 group-hover:shadow-lg ring-4 ring-transparent group-hover:ring-sage/30">
                 <div className="absolute inset-0 bg-gradient-to-tr from-black/10 to-transparent"></div>
               </div>
               <div className="text-center">
-                <h3 className="font-bold text-text-main dark:text-white text-lg">Sage Green</h3>
-                <span className="text-sm text-text-soft dark:text-gray-400">Calm & Nature</span>
+                <h3 className="font-bold text-text-main dark:text-white text-base sm:text-lg">Sage Green</h3>
+                <span className="text-xs sm:text-sm text-text-soft dark:text-gray-400">Calm & Nature</span>
               </div>
             </Link>
-            <Link href="/shop?category=oatmeal" className="group flex flex-col items-center gap-4 cursor-pointer">
-              <div className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-oatmeal relative overflow-hidden shadow-soft transition-transform duration-300 group-hover:scale-110 group-hover:shadow-lg ring-4 ring-transparent group-hover:ring-oatmeal/30">
+            <Link href="/shop?category=oatmeal" className="group flex flex-col items-center gap-3 sm:gap-4 cursor-pointer">
+              <div className="w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full bg-oatmeal relative overflow-hidden shadow-soft transition-transform duration-300 group-hover:scale-110 group-hover:shadow-lg ring-4 ring-transparent group-hover:ring-oatmeal/30">
                 <div className="absolute inset-0 bg-gradient-to-tr from-black/10 to-transparent"></div>
               </div>
               <div className="text-center">
-                <h3 className="font-bold text-text-main dark:text-white text-lg">Oatmeal</h3>
-                <span className="text-sm text-text-soft dark:text-gray-400">Neutral & Soft</span>
+                <h3 className="font-bold text-text-main dark:text-white text-base sm:text-lg">Oatmeal</h3>
+                <span className="text-xs sm:text-sm text-text-soft dark:text-gray-400">Neutral & Soft</span>
               </div>
             </Link>
-            <Link href="/shop?category=mustard" className="group flex flex-col items-center gap-4 cursor-pointer">
-              <div className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-mustard relative overflow-hidden shadow-soft transition-transform duration-300 group-hover:scale-110 group-hover:shadow-lg ring-4 ring-transparent group-hover:ring-mustard/30">
+            <Link href="/shop?category=mustard" className="group flex flex-col items-center gap-3 sm:gap-4 cursor-pointer">
+              <div className="w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full bg-mustard relative overflow-hidden shadow-soft transition-transform duration-300 group-hover:scale-110 group-hover:shadow-lg ring-4 ring-transparent group-hover:ring-mustard/30">
                 <div className="absolute inset-0 bg-gradient-to-tr from-black/10 to-transparent"></div>
               </div>
               <div className="text-center">
-                <h3 className="font-bold text-text-main dark:text-white text-lg">Soft Mustard</h3>
-                <span className="text-sm text-text-soft dark:text-gray-400">Sunny & Bright</span>
+                <h3 className="font-bold text-text-main dark:text-white text-base sm:text-lg">Soft Mustard</h3>
+                <span className="text-xs sm:text-sm text-text-soft dark:text-gray-400">Sunny & Bright</span>
               </div>
             </Link>
           </div>
         </section>
 
         {/* --- Bestsellers (Dynamic from API) --- */}
-        <section className="py-16 bg-[#f4f2f0] dark:bg-white/5 overflow-hidden">
+        <section className="py-10 sm:py-16 bg-[#f4f2f0] dark:bg-white/5 overflow-hidden">
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-end justify-between mb-10 px-2">
+            <div className="flex items-end justify-between mb-8 sm:mb-10 px-1 sm:px-2">
               <div>
-                <h2 className="text-text-main dark:text-white text-3xl font-bold tracking-tight mb-2">Community Favorites</h2>
-                <p className="text-text-soft dark:text-gray-400">Produk terbaru pilihan kami untuk Anda.</p>
+                <h2 className="text-text-main dark:text-white text-2xl sm:text-3xl font-bold tracking-tight mb-1 sm:mb-2">Community Favorites</h2>
+                <p className="text-text-soft dark:text-gray-400 text-sm sm:text-base">Produk terbaru pilihan kami untuk Anda.</p>
               </div>
               <Link href="/shop" className="hidden sm:flex items-center gap-1 text-primary font-bold hover:underline">
                 View all
@@ -113,17 +113,17 @@ export default async function Home() {
               </Link>
             </div>
 
-            <div className="flex overflow-x-auto scrollbar-hide pb-12 pt-4 px-4 -mx-4 sm:mx-0 gap-8 snap-x snap-mandatory">
+            <div className="flex overflow-x-auto scrollbar-hide pb-8 sm:pb-12 pt-4 px-2 sm:px-4 -mx-2 sm:-mx-4 sm:mx-0 gap-4 sm:gap-8 snap-x snap-mandatory">
               {products.length > 0 ? (
                 products.map((product) => (
-                  <div key={product.id} className="min-w-[280px] sm:min-w-[320px] bg-white p-4 pb-6 shadow-float rounded-sm polaroid-tilt transition-all duration-300 snap-center group">
+                  <div key={product.id} className="min-w-[220px] sm:min-w-[280px] md:min-w-[320px] bg-white p-3 sm:p-4 pb-5 sm:pb-6 shadow-float rounded-sm polaroid-tilt transition-all duration-300 snap-center group">
                     <Link href={`/shop/${product.slug}`} className="block">
-                      <div className="aspect-[4/5] w-full bg-gray-100 overflow-hidden mb-4 relative">
+                      <div className="aspect-[4/5] w-full bg-gray-100 overflow-hidden mb-3 sm:mb-4 relative">
                         {product.stock < 5 && product.stock > 0 && (
-                           <div className="absolute top-2 left-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded-sm z-10 uppercase">Low Stock</div>
+                           <div className="absolute top-2 left-2 bg-primary text-white text-[10px] sm:text-xs font-bold px-2 py-1 rounded-sm z-10 uppercase">Low Stock</div>
                         )}
                         {product.stock === 0 && (
-                           <div className="absolute top-2 left-2 bg-gray-800 text-white text-xs font-bold px-2 py-1 rounded-sm z-10 uppercase">Sold Out</div>
+                           <div className="absolute top-2 left-2 bg-gray-800 text-white text-[10px] sm:text-xs font-bold px-2 py-1 rounded-sm z-10 uppercase">Sold Out</div>
                         )}
                         {product.banner_image ? (
                           <Image 
@@ -138,13 +138,13 @@ export default async function Home() {
                              <span className="material-symbols-outlined text-4xl">image</span>
                           </div>
                         )}
-                        <button className="absolute bottom-4 right-4 bg-white text-text-main p-3 rounded-full shadow-md opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:bg-primary hover:text-white z-20">
-                          <span className="material-symbols-outlined">add_shopping_cart</span>
+                        <button className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 bg-white text-text-main p-2.5 sm:p-3 rounded-full shadow-md opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:bg-primary hover:text-white z-20">
+                          <span className="material-symbols-outlined text-[18px] sm:text-[24px]">add_shopping_cart</span>
                         </button>
                       </div>
-                      <div className="px-2 text-center">
-                        <h3 className="text-xl font-bold text-text-main mb-1 line-clamp-1 group-hover:text-primary transition-colors">{product.name}</h3>
-                        <p className="text-primary font-bold">Rp {Number(product.price).toLocaleString('id-ID')}</p>
+                      <div className="px-1 sm:px-2 text-center">
+                        <h3 className="text-base sm:text-xl font-bold text-text-main mb-1 line-clamp-1 group-hover:text-primary transition-colors">{product.name}</h3>
+                        <p className="text-primary font-bold text-sm sm:text-base">Rp {Math.floor(Number(product.price)).toLocaleString('id-ID')}</p>
                       </div>
                     </Link>
                   </div>
@@ -155,82 +155,96 @@ export default async function Home() {
                 </div>
               )}
             </div>
+
+            {/* Mobile "View All" Link */}
+            <div className="sm:hidden text-center mt-2">
+              <Link href="/shop" className="inline-flex items-center gap-1 text-primary font-bold hover:underline text-sm">
+                Lihat Semua Produk
+                <span className="material-symbols-outlined text-sm">arrow_forward</span>
+              </Link>
+            </div>
           </div>
         </section>
 
         {/* --- Value Props / Features --- */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-[1440px] mx-auto">
-  <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-    <div className="flex flex-col items-center text-center gap-4 p-6 rounded-2xl bg-white dark:bg-white/5 border border-transparent hover:border-primary/20 transition-all duration-300 hover:shadow-soft">
-      <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2">
-        <span className="material-symbols-outlined text-3xl">thermometer</span>
+        <section className="py-12 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-[1440px] mx-auto">
+  <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-10">
+    <div className="flex flex-row sm:flex-col items-center sm:items-center text-left sm:text-center gap-4 sm:gap-4 p-4 sm:p-6 rounded-2xl bg-white dark:bg-white/5 border border-transparent hover:border-primary/20 transition-all duration-300 hover:shadow-soft">
+      <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary flex-shrink-0 sm:mb-2">
+        <span className="material-symbols-outlined text-2xl sm:text-3xl">thermometer</span>
       </div>
-      <h3 className="text-xl font-bold text-text-main dark:text-white">Bahan Lembut & Adem</h3>
-      <p className="text-text-soft dark:text-gray-400">
-        Terbuat dari kain microtex atau katun berkualitas yang halus dan nyaman di kulit, memberikan kenyamanan optimal sepanjang malam.
-      </p>
+      <div>
+        <h3 className="text-lg sm:text-xl font-bold text-text-main dark:text-white">Bahan Lembut & Adem</h3>
+        <p className="text-text-soft dark:text-gray-400 text-sm sm:text-base mt-1 sm:mt-0">
+          Terbuat dari kain microtex atau katun berkualitas yang halus dan nyaman di kulit, memberikan kenyamanan optimal sepanjang malam.
+        </p>
+      </div>
     </div>
     
-    <div className="flex flex-col items-center text-center gap-4 p-6 rounded-2xl bg-white dark:bg-white/5 border border-transparent hover:border-primary/20 transition-all duration-300 hover:shadow-soft">
-      <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2">
-        <span className="material-symbols-outlined text-3xl">palette</span>
+    <div className="flex flex-row sm:flex-col items-center sm:items-center text-left sm:text-center gap-4 sm:gap-4 p-4 sm:p-6 rounded-2xl bg-white dark:bg-white/5 border border-transparent hover:border-primary/20 transition-all duration-300 hover:shadow-soft">
+      <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary flex-shrink-0 sm:mb-2">
+        <span className="material-symbols-outlined text-2xl sm:text-3xl">palette</span>
       </div>
-      <h3 className="text-xl font-bold text-text-main dark:text-white">Warna Awet & Tidak Luntur</h3>
-      <p className="text-text-soft dark:text-gray-400">
-        Menggunakan teknologi disperse printing yang membuat motif tetap cerah dan tidak mudah pudar meski setelah dicuci berkali-kali.
-      </p>
+      <div>
+        <h3 className="text-lg sm:text-xl font-bold text-text-main dark:text-white">Warna Awet & Tidak Luntur</h3>
+        <p className="text-text-soft dark:text-gray-400 text-sm sm:text-base mt-1 sm:mt-0">
+          Menggunakan teknologi disperse printing yang membuat motif tetap cerah dan tidak mudah pudar meski setelah dicuci berkali-kali.
+        </p>
+      </div>
     </div>
     
-    <div className="flex flex-col items-center text-center gap-4 p-6 rounded-2xl bg-white dark:bg-white/5 border border-transparent hover:border-primary/20 transition-all duration-300 hover:shadow-soft">
-      <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2">
-        <span className="material-symbols-outlined text-3xl">fit_screen</span>
+    <div className="flex flex-row sm:flex-col items-center sm:items-center text-left sm:text-center gap-4 sm:gap-4 p-4 sm:p-6 rounded-2xl bg-white dark:bg-white/5 border border-transparent hover:border-primary/20 transition-all duration-300 hover:shadow-soft">
+      <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary flex-shrink-0 sm:mb-2">
+        <span className="material-symbols-outlined text-2xl sm:text-3xl">fit_screen</span>
       </div>
-      <h3 className="text-xl font-bold text-text-main dark:text-white">Model Berkaret yang Pas</h3>
-      <p className="text-text-soft dark:text-gray-400">
-        Desain fitted dengan karet di setiap sudut membuatnya selalu rapi dan pas menutupi kasur, tidak mudah melorot atau bergeser.
-      </p>
+      <div>
+        <h3 className="text-lg sm:text-xl font-bold text-text-main dark:text-white">Model Berkaret yang Pas</h3>
+        <p className="text-text-soft dark:text-gray-400 text-sm sm:text-base mt-1 sm:mt-0">
+          Desain fitted dengan karet di setiap sudut membuatnya selalu rapi dan pas menutupi kasur, tidak mudah melorot atau bergeser.
+        </p>
+      </div>
     </div>
   </div>
 </section>
 
         {/* --- Social Proof / Instagram Grid --- */}
-        <section className="py-16 bg-white dark:bg-background-dark">
+        <section className="py-10 sm:py-16 bg-white dark:bg-background-dark">
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-text-main dark:text-white text-3xl font-bold tracking-tight mb-3">As Seen In Your Homes</h2>
-              <p className="text-text-soft dark:text-gray-400">Join the cozy club and tag us @ameskarasprei.id</p>
+            <div className="text-center mb-8 sm:mb-12">
+              <h2 className="text-text-main dark:text-white text-2xl sm:text-3xl font-bold tracking-tight mb-2 sm:mb-3">As Seen In Your Homes</h2>
+              <p className="text-text-soft dark:text-gray-400 text-sm sm:text-base">Join the cozy club and tag us @ameskarasprei.id</p>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px] md:auto-rows-[300px]">
-              <div className="relative group overflow-hidden rounded-xl row-span-2 col-span-2 md:col-span-2 md:row-span-2">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4 auto-rows-[150px] sm:auto-rows-[200px] md:auto-rows-[300px]">
+              <div className="relative group overflow-hidden rounded-lg sm:rounded-xl row-span-2 col-span-2 md:col-span-2 md:row-span-2">
                 <img className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQegTQD2FsuX7mGKrFx81pMj11kTf264Dvi4sb9Nu3PJx-ytkS7JHziIKdcFv89vORJvJXUMvJLHI9gR-kPIFjv1twO6H-X7-Qa5csBVKLYCstMIAWovXKKyzw93pUehBnMyMP9yz9ws5SdJ-pR2WvozwTRJE004xziZbKuuiQJRsHN3OZom70phJ902bPD0i2ZcF2tvBCrO7rosCRtaHuNySAjpFqYhUF2yAvq4HXdI3dokAp1SWBvhZ63xeL1pAplJv8QhIW9IM" alt="IG 1" />
                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <Link href="/shop"  className="bg-white text-text-main px-4 py-2 rounded-full font-bold text-sm flex items-center gap-2">
-                    <span className="material-symbols-outlined text-sm">favorite</span> Shop the Look
+                  <Link href="/shop"  className="bg-white text-text-main px-3 sm:px-4 py-2 rounded-full font-bold text-xs sm:text-sm flex items-center gap-1 sm:gap-2">
+                    <span className="material-symbols-outlined text-xs sm:text-sm">favorite</span> Shop the Look
                   </Link>
                 </div>
               </div>
-              <div className="relative group overflow-hidden rounded-xl">
+              <div className="relative group overflow-hidden rounded-lg sm:rounded-xl">
                 <img className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4kLXTKkn9KnsiwK6jQ2SX9qLo15sgidBjoA1vcRHxhTcdbT8v6_lCPDIWtFs7CqSlFzT3o3CXrAtbmiBWeblb4t2-sXRjQTlFeV7ZLCiGADw9yhLLS9_DUhOv3VywNMpBq3AgcyIp1PzYrJbyMZcmP5U79Btg8NrBZi5UFNG_GZuJEhOZwP8aAuwVvBhcf7iYk3o56xqQTyOUC9dvuDTdw1Nn2Sf_XlxNdcjbYZriFkizceiFN6xXcrA-PppvQK-u468LdOukD_Q" alt="IG 2" />
                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <span className="text-white font-medium">@sarah_sleeps</span>
+                  <span className="text-white font-medium text-xs sm:text-base">@sarah_sleeps</span>
                 </div>
               </div>
-              <div className="relative group overflow-hidden rounded-xl">
+              <div className="relative group overflow-hidden rounded-lg sm:rounded-xl">
                 <img className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlnNivZ3MpYCCGKtoKEhH6DTzYqRD3CCR8FowveK84qNRInnjmpi80Xl5Y53CW076KdswiKVG6GDfn_eIC69zEKvnsklDaITRbtzRZFbC4E0o-WoEK7oEKD2uRBZsi--uhCdekmEVZRuhqo2VKK9KJv4SBYDutXkRzaYN9FG2xUSG8ae_lcD-06f5irrA493WYzWpDwgy6o38bF_Bl9tJTMKpap0sih6SNLDBk4X-I6-E7LLtbvbci5znWPwmYnrmh8zNS73t1PHI" alt="IG 3" />
                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <span className="text-white font-medium">@cozy_corner</span>
+                  <span className="text-white font-medium text-xs sm:text-base">@cozy_corner</span>
                 </div>
               </div>
-              <div className="relative group overflow-hidden rounded-xl">
+              <div className="relative group overflow-hidden rounded-lg sm:rounded-xl">
                 <img className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSlnySBcmbNrWXBa-yEWkncEUakrmoeGVvN9LETgMDDed0n7zhP8LheIlgkPSpCNflWE5ORJQqJ85555ZDcbWeV9ktNSW5kpFfJu180QaX_9UXPbUdN4pgJGpyUgxbSZSmBPP1fyRcdBlqj9VVapNbQjEr8P0kXautaL1UMm0V2tMGzJ7flT3cafxj4uk4p4H6lWzXUfbR5w5-d31qzeuv-Mklmo2_LmAaOH6XT0Fys7sCY8SEgL1QP1BUNhd_jdXC-QMLVOMAdsM" alt="IG 4" />
                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <span className="text-white font-medium">@urban_jungle</span>
+                  <span className="text-white font-medium text-xs sm:text-base">@urban_jungle</span>
                 </div>
               </div>
-              <div className="relative group overflow-hidden rounded-xl">
+              <div className="relative group overflow-hidden rounded-lg sm:rounded-xl">
                 <img className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkmvTe_B8DIrtW7UBWOgj3x41rqm3zRQgGScN5s5arwcJMvkdKmKjBxbwRHOXgGZCUhMAaObu9kx38ZfNUWrTNssvKwx4rMsYxYY68YEIh02JGjBwMw2naHbtFwqqY_i0sMUxsfqMqPUDdFXWU6MKgt6iKcxk0WyWRFn3Cj2gthk-4N2kQFUTWnJOgiJIrU5hiJemNLz5xg4xJKiYBUfb-6KghFON_bXsUOH3mNqAPRmmVfFGpUunmIch8ydBare3OfIyMocNpwAw" alt="IG 5" />
                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <span className="text-white font-medium">@morning_light</span>
+                  <span className="text-white font-medium text-xs sm:text-base">@morning_light</span>
                 </div>
               </div>
             </div>

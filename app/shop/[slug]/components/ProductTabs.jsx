@@ -2,26 +2,26 @@
 
 import { useState } from 'react';
 
-export default function ProductTabs() {
-  const [activeTab, setActiveTab] = useState('details');
+export default function ProductTabs({ description }) {
+  const [activeTab, setActiveTab] = useState('description');
 
   return (
-    <div className="mt-24 max-w-4xl mx-auto">
+    <div className="mt-12 sm:mt-24 max-w-4xl mx-auto">
       {/* --- TAB HEADERS --- */}
-      <div className="flex justify-center border-b border-gray-200 mb-8 overflow-x-auto scrollbar-hide">
+      <div className="flex justify-start sm:justify-center border-b border-gray-200 mb-6 sm:mb-8 overflow-x-auto scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0">
         <button
-          onClick={() => setActiveTab('details')}
-          className={`px-6 pb-4 border-b-2 text-sm font-bold tracking-wide transition-all uppercase whitespace-nowrap ${
-            activeTab === 'details'
+          onClick={() => setActiveTab('description')}
+          className={`px-4 sm:px-6 pb-3 sm:pb-4 border-b-2 text-xs sm:text-sm font-bold tracking-wide transition-all uppercase whitespace-nowrap ${
+            activeTab === 'description'
               ? 'border-primary text-primary'
               : 'border-transparent text-text-soft hover:text-text-main font-medium'
           }`}
         >
-          Detail
+          Deskripsi
         </button>
         <button
           onClick={() => setActiveTab('care')}
-          className={`px-6 pb-4 border-b-2 text-sm font-bold tracking-wide transition-all uppercase whitespace-nowrap ${
+          className={`px-4 sm:px-6 pb-3 sm:pb-4 border-b-2 text-xs sm:text-sm font-bold tracking-wide transition-all uppercase whitespace-nowrap ${
             activeTab === 'care'
               ? 'border-primary text-primary'
               : 'border-transparent text-text-soft hover:text-text-main font-medium'
@@ -31,7 +31,7 @@ export default function ProductTabs() {
         </button>
         <button
           onClick={() => setActiveTab('shipping')}
-          className={`px-6 pb-4 border-b-2 text-sm font-bold tracking-wide transition-all uppercase whitespace-nowrap ${
+          className={`px-4 sm:px-6 pb-3 sm:pb-4 border-b-2 text-xs sm:text-sm font-bold tracking-wide transition-all uppercase whitespace-nowrap ${
             activeTab === 'shipping'
               ? 'border-primary text-primary'
               : 'border-transparent text-text-soft hover:text-text-main font-medium'
@@ -42,32 +42,30 @@ export default function ProductTabs() {
       </div>
 
       {/* --- TAB CONTENT --- */}
-      <div className="prose prose-stone mx-auto text-text-soft leading-relaxed min-h-[200px]">
+      <div className="prose prose-sm sm:prose-stone mx-auto text-text-soft leading-relaxed min-h-[150px] sm:min-h-[200px] px-1 sm:px-0">
         
-        {/* CONTENT: DETAIL */}
-        {activeTab === 'details' && (
+        {/* CONTENT: DESKRIPSI PRODUK */}
+        {activeTab === 'description' && (
           <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
-            <p>
-              Rasakan kemewahan linen signature kami. Bersumber dari flax Eropa terbaik dan melalui proses 
-              <em> stone-washed</em> untuk kelembutan instan, koleksi ini dirancang untuk menghadirkan kenyamanan 
-              tanpa usaha di kamar tidur Anda. Bahannya dapat bernapas (<em>breathable</em>), tahan lama, dan hipoalergenik secara alami.
-            </p>
-            <ul className="list-disc pl-5 space-y-2 mt-4 marker:text-primary">
-              <li>100% Linen Flax Eropa</li>
-              <li><em>Stone-washed</em> untuk kelembutan maksimal</li>
-              <li>Bersertifikat OEKO-TEX® (Bebas dari bahan kimia berbahaya)</li>
-              <li>Termasuk: 1 Sarung Duvet, 2 Sarung Bantal</li>
-            </ul>
+            {description ? (
+              <p className="text-sm sm:text-base leading-relaxed whitespace-pre-line">
+                {description}
+              </p>
+            ) : (
+              <p className="text-sm sm:text-base text-gray-400 italic">
+                Belum ada deskripsi untuk produk ini.
+              </p>
+            )}
           </div>
         )}
 
         {/* CONTENT: PANDUAN PERAWATAN */}
         {activeTab === 'care' && (
           <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
-            <p>
+            <p className="text-sm sm:text-base">
               Perawatan yang tepat akan memastikan linen Anda tetap lembut dan tahan lama.
             </p>
-            <ul className="list-disc pl-5 space-y-2 mt-4 marker:text-primary">
+            <ul className="list-disc pl-4 sm:pl-5 space-y-1.5 sm:space-y-2 mt-3 sm:mt-4 marker:text-primary text-sm sm:text-base">
               <li>Cuci dengan mesin menggunakan air dingin atau hangat (maks 40°C).</li>
               <li>Gunakan deterjen cair yang lembut. Hindari pemutih (bleach).</li>
               <li>Keringkan dengan mesin pada suhu rendah atau jemur di tempat teduh.</li>
@@ -79,10 +77,10 @@ export default function ProductTabs() {
         {/* CONTENT: PENGIRIMAN */}
         {activeTab === 'shipping' && (
           <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
-            <p>
+            <p className="text-sm sm:text-base">
               Kami berkomitmen untuk mengirimkan pesanan Anda dengan aman dan cepat.
             </p>
-            <ul className="list-disc pl-5 space-y-2 mt-4 marker:text-primary">
+            <ul className="list-disc pl-4 sm:pl-5 space-y-1.5 sm:space-y-2 mt-3 sm:mt-4 marker:text-primary text-sm sm:text-base">
               <li>Pesanan diproses dalam 1-2 hari kerja (Senin - Jumat).</li>
               <li>Pengiriman Reguler: 2-4 hari kerja (Jabodetabek), 3-7 hari kerja (Luar Jabodetabek).</li>
               <li>Gratis ongkos kirim untuk pembelian di atas Rp 1.000.000.</li>

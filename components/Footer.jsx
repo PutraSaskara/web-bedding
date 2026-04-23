@@ -3,21 +3,21 @@ import Image from 'next/image';
 
 export default function Footer() {
   return (
-    <footer className="bg-text-main text-white py-16 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row justify-between gap-12">
+    <footer className="bg-text-main text-white py-10 sm:py-16 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row justify-between gap-8 sm:gap-12">
         
         {/* --- LEFT: BRAND & SOCIAL MEDIA --- */}
         <div className="max-w-md">
-          <div className="mb-6">
+          <div className="mb-4 sm:mb-6">
             <Image 
               src="/logo1.png" 
               alt="Nyamann Logo" 
               width={128} 
               height={128} 
-              className="w-32 h-32 object-contain"
+              className="w-20 h-20 sm:w-32 sm:h-32 object-contain"
             />
           </div>
-          <p className="text-gray-400 mb-8 leading-relaxed">
+          <p className="text-gray-400 mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base">
               Kombinasi sempurna antara kenyamanan bahan premium, desain aesthetic yang tidak luntur, dan kepraktisan model fitted untuk pengalaman tidur yang lebih baik.
           </p>
           
@@ -42,7 +42,7 @@ export default function Footer() {
         </div>
 
         {/* --- RIGHT: LINKS --- */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 md:gap-16">
+        <div className="grid grid-cols-2 gap-6 sm:gap-8 md:gap-16">
           {/* <div className="flex flex-col gap-4">
             <h4 className="font-bold text-lg">Shop</h4>
             <Link href="/shop" className="text-gray-400 hover:text-white transition-colors">Duvet Covers</Link>
@@ -50,21 +50,21 @@ export default function Footer() {
             <Link href="/shop" className="text-gray-400 hover:text-white transition-colors">Pillowcases</Link>
             <Link href="/shop" className="text-gray-400 hover:text-white transition-colors">Bundles</Link>
           </div> */}
-          <div className="flex flex-col gap-4">
-            <h4 className="font-bold text-lg">About</h4>
-            <Link href="/our-story" className="text-gray-400 hover:text-white transition-colors">Our Story</Link>
-            <Link href="/journal" className="text-gray-400 hover:text-white transition-colors">Blog</Link>
+          <div className="flex flex-col gap-3 sm:gap-4">
+            <h4 className="font-bold text-base sm:text-lg">About</h4>
+            <Link href="/our-story" className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base">Our Story</Link>
+            <Link href="/journal" className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base">Blog</Link>
           </div>
-          <div className="flex flex-col gap-4">
-            <h4 className="font-bold text-lg">Support</h4>
-            <Link href="/contact-us" className="text-gray-400 hover:text-white transition-colors">Contact Us</Link>
-            <Link href="/shipping" className="text-gray-400 hover:text-white transition-colors">Shipping</Link>
+          <div className="flex flex-col gap-3 sm:gap-4">
+            <h4 className="font-bold text-base sm:text-lg">Support</h4>
+            <Link href="/contact-us" className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base">Contact Us</Link>
+            <Link href="/shipping" className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base">Shipping</Link>
           </div>
         </div>
       </div>
 
       {/* --- BOTTOM --- */}
-      <div className="max-w-[1440px] mx-auto mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+      <div className="max-w-[1440px] mx-auto mt-10 sm:mt-16 pt-6 sm:pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs sm:text-sm text-gray-500">
         <p>© 2024 Ameskara sprei bed and linen. All rights reserved.</p>
         {/* <div className="flex gap-6">
           <Link href="#" className="hover:text-white">Privacy Policy</Link>

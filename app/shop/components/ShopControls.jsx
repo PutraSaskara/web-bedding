@@ -36,8 +36,9 @@ export default function ShopControls({ categories, initialSearch, initialCategor
 
   // Handle Category Change (Langsung apply)
   const handleCategoryChange = (newCategory) => {
-    setCategory(newCategory);
-    applyFilters(search, newCategory);
+    const selected = category === newCategory ? '' : newCategory; // Toggle: klik lagi = deselect
+    setCategory(selected);
+    applyFilters(search, selected);
   };
 
   // Fungsi utama update URL
@@ -53,16 +54,16 @@ export default function ShopControls({ categories, initialSearch, initialCategor
   };
 
   return (
-    <div className="flex flex-col md:flex-row gap-4 mb-8">
+    <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
       {/* Search Input */}
-      <div className="flex-1 relative">
-        <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
+      <div className="relative">
+        <span className="material-symbols-outlined absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 text-gray-400 text-[20px]">
           search
         </span>
         <input 
           type="text" 
           placeholder="Cari nama produk..." 
-          className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+          className="w-full pl-10 sm:pl-12 pr-4 py-2.5 sm:py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-sm sm:text-base bg-white"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -73,26 +74,33 @@ export default function ShopControls({ categories, initialSearch, initialCategor
         )}
       </div>
 
-      {/* Category Dropdown */}
-      <div className="w-full md:w-64 relative">
-        <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
-          filter_list
-        </span>
-        <select 
-          className="w-full pl-12 pr-10 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 appearance-none bg-white cursor-pointer"
-          value={category}
-          onChange={(e) => handleCategoryChange(e.target.value)}
+      {/* Category Pills (Horizontally Scrollable) */}
+      <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-1 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap">
+        {/* "Semua" pill */}
+        <button
+          onClick={() => { setCategory(''); applyFilters(search, ''); }}
+          className={`flex-shrink-0 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${
+            category === ''
+              ? 'bg-primary text-white shadow-sm'
+              : 'bg-white text-text-soft border border-gray-200 hover:border-gray-300 hover:text-text-main'
+          }`}
         >
-          <option value="">Semua Kategori</option>
-          {categories.map((cat) => (
-            <option key={cat.id} value={cat.slug}>
-              {cat.name}
-            </option>
-          ))}
-        </select>
-        <span className="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
-          expand_more
-        </span>
+          Semua
+        </button>
+        
+        {categories.map((cat) => (
+          <button
+            key={cat.id}
+            onClick={() => handleCategoryChange(cat.slug)}
+            className={`flex-shrink-0 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${
+              category === cat.slug
+                ? 'bg-primary text-white shadow-sm'
+                : 'bg-white text-text-soft border border-gray-200 hover:border-gray-300 hover:text-text-main'
+            }`}
+          >
+            {cat.name}
+          </button>
+        ))}
       </div>
     </div>
   );
