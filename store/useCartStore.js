@@ -33,7 +33,7 @@ const useCartStore = create(
             cart: [...cart, {
               id: product.id,
               name: product.name,
-              price: product.price,
+              price: size?.price || product.price,
               image: variant?.image || product.banner_image,
               selectedVariant: variant,
               selectedSize: size,

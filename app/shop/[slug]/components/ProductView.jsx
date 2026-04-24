@@ -14,15 +14,15 @@ export default function ProductView({ product }) {
       ? JSON.parse(product.variants) 
       : [];
   
-  const price = Number(product.price);
-
-  // 2. State Utama
   const [activeImage, setActiveImage] = useState(product.banner_image);
   const [selectedVariant, setSelectedVariant] = useState(variants.length > 0 ? variants[0] : null);
   const [selectedSize, setSelectedSize] = useState(null); 
   const [quantity, setQuantity] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showToast, setShowToast] = useState(false);
+
+  const basePrice = Number(product.price);
+  const price = selectedSize && selectedSize.price ? Number(selectedSize.price) : basePrice;
 
   // --- LOGIC LIGHTBOX GALLERY ---
   const allImages = useMemo(() => {

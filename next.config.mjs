@@ -32,6 +32,11 @@ const nextConfig = {
         hostname: 'ameskarabed.saskaraputra.my.id',
         pathname: '/uploads/**',
       },
+      // 4. Izinkan gambar dari Cloudinary
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+      },
     ],
   },
 };
