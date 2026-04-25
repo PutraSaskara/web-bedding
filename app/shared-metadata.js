@@ -44,10 +44,10 @@ export const sharedMetadata = {
     },
   },
 
-  // Verifikasi Google Search Console (ganti dengan kode asli Anda)
-  // verification: {
-  //   google: 'YOUR_GOOGLE_SITE_VERIFICATION_CODE',
-  // },
+  // Verifikasi Google Search Console
+  verification: {
+    google: 'H43YzVymgos-IhyX8fgTIv8Avbpk4VHZUM5jpwx4Uiw',
+  },
 
   // Alternates & Canonical
   alternates: {
