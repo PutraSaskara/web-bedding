@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 
 export default function ProductTabs({ description }) {
   const [activeTab, setActiveTab] = useState('description');
@@ -12,8 +13,8 @@ export default function ProductTabs({ description }) {
         <button
           onClick={() => setActiveTab('description')}
           className={`px-4 sm:px-6 pb-3 sm:pb-4 border-b-2 text-xs sm:text-sm font-bold tracking-wide transition-all uppercase whitespace-nowrap ${activeTab === 'description'
-              ? 'border-primary text-primary'
-              : 'border-transparent text-text-soft hover:text-text-main font-medium'
+            ? 'border-primary text-primary'
+            : 'border-transparent text-text-soft hover:text-text-main font-medium'
             }`}
         >
           Deskripsi
@@ -21,8 +22,8 @@ export default function ProductTabs({ description }) {
         <button
           onClick={() => setActiveTab('care')}
           className={`px-4 sm:px-6 pb-3 sm:pb-4 border-b-2 text-xs sm:text-sm font-bold tracking-wide transition-all uppercase whitespace-nowrap ${activeTab === 'care'
-              ? 'border-primary text-primary'
-              : 'border-transparent text-text-soft hover:text-text-main font-medium'
+            ? 'border-primary text-primary'
+            : 'border-transparent text-text-soft hover:text-text-main font-medium'
             }`}
         >
           Panduan Perawatan
@@ -30,8 +31,8 @@ export default function ProductTabs({ description }) {
         <button
           onClick={() => setActiveTab('shipping')}
           className={`px-4 sm:px-6 pb-3 sm:pb-4 border-b-2 text-xs sm:text-sm font-bold tracking-wide transition-all uppercase whitespace-nowrap ${activeTab === 'shipping'
-              ? 'border-primary text-primary'
-              : 'border-transparent text-text-soft hover:text-text-main font-medium'
+            ? 'border-primary text-primary'
+            : 'border-transparent text-text-soft hover:text-text-main font-medium'
             }`}
         >
           Pengiriman
@@ -90,7 +91,13 @@ export default function ProductTabs({ description }) {
                 <span className="font-semibold">Ongkos kirim dihitung saat checkout</span> dan tidak termasuk dalam harga produk.
               </li>
               <li>
-                Garansi pengembalian <span className="font-semibold">7 hari</span> jika produk cacat atau tidak sesuai pesanan.
+                Dengan membeli, pembeli dianggap menyetujui <Link href="/terms" className="underline hover:text-primary transition-colors">syarat & ketentuan</Link>
+              </li>
+              <li>
+                Barang yang sudah dibeli tidak dapat dikembalikan
+              </li>
+              <li>
+                Semua barang telah dicek sebelum dikirim
               </li>
             </ul>
           </div>

@@ -59,6 +59,7 @@ export default function Footer() {
             <h4 className="font-bold text-base sm:text-lg">Support</h4>
             <Link href="/contact-us" className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base">Contact Us</Link>
             <Link href="/shipping" className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base">Shipping</Link>
+            <Link href="/terms" className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base">Syarat & Ketentuan</Link>
           </div>
         </div>
       </div>
