@@ -1,5 +1,5 @@
 export default async function sitemap() {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskara.com';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskarasprei.shop';
   const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const API_KEY = process.env.WEB_API_KEY;
 
