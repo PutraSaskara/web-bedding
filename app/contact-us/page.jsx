@@ -1,7 +1,7 @@
 import React from 'react';
 import ContactForm from '../../components/ContactForm';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskara.com';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskarasprei.shop';
 
 export const metadata = {
   title: 'Hubungi Kami',

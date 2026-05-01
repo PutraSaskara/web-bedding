@@ -23,7 +23,7 @@ async function getArticles() {
   }
 }
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskara.com';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskarasprei.shop';
 
 export const metadata = {
   title: "Journal - Tips Tidur & Inspirasi Dekorasi",

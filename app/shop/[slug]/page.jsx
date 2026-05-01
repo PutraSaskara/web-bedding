@@ -62,7 +62,7 @@ export async function generateMetadata({ params }) {
   }
 
   // Jika produk ditemukan, buat metadata yang kaya & dinamis
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskara.com';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskarasprei.shop';
   const productUrl = `${siteUrl}/shop/${product.slug}`;
   const productDescription = product.meta_description || product.description?.substring(0, 160) || sharedMetadata.description;
   const productImages = product.banner_image ? [product.banner_image] : sharedMetadata.openGraph.images.map(img => img.url);
@@ -112,7 +112,7 @@ export default async function ProductDetailPage({ params }) {
   }
 
   // JSON-LD Product Structured Data
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskara.com';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskarasprei.shop';
   const productJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Product',

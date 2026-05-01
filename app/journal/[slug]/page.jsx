@@ -37,9 +37,22 @@ export async function generateMetadata({ params }) {
   const article = await getArticleDetail(params.slug);
   if (!article) return { title: 'Article Not Found' };
   
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskarasprei.shop';
+  const articleUrl = `${siteUrl}/journal/${article.slug}`;
+
   return {
-    title: `${article.title} | Nyamann Journal`,
+    title: `${article.title} | Ameskara Journal`,
     description: article.excerpt,
+    alternates: {
+      canonical: articleUrl,
+    },
+    openGraph: {
+      title: `${article.title} | Ameskara Journal`,
+      description: article.excerpt,
+      url: articleUrl,
+      type: 'article',
+      images: article.thumbnail ? [article.thumbnail] : [],
+    },
   };
 }
 

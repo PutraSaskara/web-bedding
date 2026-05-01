@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskara.com';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskarasprei.shop';
 
 // SEO Metadata for Home Page
 export const metadata = {

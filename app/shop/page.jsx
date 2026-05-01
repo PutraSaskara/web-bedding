@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import ShopControls from './components/ShopControls';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskara.com';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskarasprei.shop';
 
 export const metadata = {
   title: 'Belanja Sprei & Bedcover Premium',

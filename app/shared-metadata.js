@@ -3,7 +3,7 @@
  */
 
 // Ganti dengan URL production Anda nanti
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskara.com';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskarasprei.shop';
 
 // Gambar default yang akan muncul saat link di-share.
 const ogImageUrl = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCQegTQD2FsuX7mGKrFx81pMj11kTf264Dvi4sb9Nu3PJx-ytkS7JHziIKdcFv89vORJvJXUMvJLHI9gR-kPIFjv1twO6H-X7-Qa5csBVKLYCstMIAWovXKKyzw93pUehBnMyMP9yz9ws5SdJ-pR2WvozwTRJE004xziZbKuuiQJRsHN3OZom70phJ902bPD0i2ZcF2tvBCrO7rosCRtaHuNySAjpFqYhUF2yAvq4HXdI3dokAp1SWBvhZ63xeL1pAplJv8QhIW9IM';
@@ -49,9 +49,9 @@ export const sharedMetadata = {
     google: 'H43YzVymgos-IhyX8fgTIv8Avbpk4VHZUM5jpwx4Uiw',
   },
 
-  // Alternates & Canonical
+  // Alternates & Canonical (Akan diatur secara dinamis di layout.jsx)
   alternates: {
-    canonical: siteUrl,
+    canonical: './',
   },
 
   // Metadata untuk social media sharing (Open Graph)
