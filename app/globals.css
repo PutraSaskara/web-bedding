@@ -56,3 +56,51 @@ html {
         padding-bottom: env(safe-area-inset-bottom);
     }
 }
+
+/* Premium Utilities */
+.glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.dark .glass {
+    background: rgba(34, 22, 16, 0.7);
+    backdrop-filter: blur(12px);
+}
+
+.text-balance {
+    text-wrap: balance;
+}
+
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+
+/* Custom Shadows */
+.shadow-premium {
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05);
+}
+
+/* Scroll Snap for Product Carousel */
+.snap-x-mandatory {
+    scroll-snap-type: x mandatory;
+}
+.snap-start {
+    scroll-snap-align: start;
+}
