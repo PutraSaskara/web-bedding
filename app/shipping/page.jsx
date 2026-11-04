@@ -1,7 +1,7 @@
 import React from 'react';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskarasprei.shop';
-
+const rawSiteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskarasprei.shop';
+const siteUrl = rawSiteUrl.replace(/\/+$/, '');
 export const metadata = {
   title: 'Informasi Pengiriman',
   description: 'Pengiriman produk Ameskara dari Bali (Denpasar) ke seluruh Indonesia. Ongkos kirim akan diinformasikan setelah pemesanan melalui WhatsApp.',

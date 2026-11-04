@@ -61,6 +61,7 @@ export default function ArticleRenderer({ content }) {
                         src={block.data.file.url} 
                         alt={block.data.caption || 'Article Image'} 
                         fill 
+                        sizes="(max-width: 768px) 100vw, 768px"
                         className="object-cover"
                     />
                 </div>

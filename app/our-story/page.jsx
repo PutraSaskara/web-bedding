@@ -73,6 +73,7 @@ export default function OurStoryPage() {
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQegTQD2FsuX7mGKrFx81pMj11kTf264Dvi4sb9Nu3PJx-ytkS7JHziIKdcFv89vORJvJXUMvJLHI9gR-kPIFjv1twO6H-X7-Qa5csBVKLYCstMIAWovXKKyzw93pUehBnMyMP9yz9ws5SdJ-pR2WvozwTRJE004xziZbKuuiQJRsHN3OZom70phJ902bPD0i2ZcF2tvBCrO7rosCRtaHuNySAjpFqYhUF2yAvq4HXdI3dokAp1SWBvhZ63xeL1pAplJv8QhIW9IM" 
                 alt="Cozy Bedroom" 
                 fill 
+                sizes="100vw"
                 className="object-cover"
                 priority
             />
@@ -85,7 +86,8 @@ export default function OurStoryPage() {
                      <Image 
                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBV3l7I99e2VzFX6ZAqfVbbDOXsuz9UnrVtX38DyveEkqO5IThmVs0Xqm4whD0riQS0myJ2HDCb8FnvMxQZuk2_nO9f4czC_sNH6eH1hzdf_4BbqqP4hH1ONr3JMuAYx0CYj_z9aXvdjFVKYc9XAfA5kyP8eJ1yysL9KFbh4EYxlx_kKTMDOV9iioGrrps0kd6G0X9ERXpvAZfWxiTqRj0p6f4fWslg7yVvt1NdYleKw2-5RyVLncr5epVY8yEQJjItq7ct462-pI" 
                         alt="Fabric Details" 
-                        fill 
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
                         className="object-cover"
                     />
                 </div>
@@ -129,7 +131,8 @@ export default function OurStoryPage() {
                      <Image 
                         src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?q=80&w=1000&auto=format&fit=crop" 
                         alt="Sprei berkualitas dengan motif modern" 
-                        fill 
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
                         className="object-cover"
                     />
                 </div>

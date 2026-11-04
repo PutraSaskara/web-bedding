@@ -7,27 +7,51 @@ import ProductView from './components/ProductView';
 import ProductTabs from './components/ProductTabs';
 import { sharedMetadata } from '../../shared-metadata';
 
-// --- Fetch Detail Produk ---
-async function getProductDetail(slug) {
-  const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
-  const API_KEY = process.env.WEB_API_KEY;
+const rawSiteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskarasprei.shop';
+const siteUrl = rawSiteUrl.replace(/\/+$/, '');
+const rawApiUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/api';
+const API_URL = rawApiUrl.replace(/\/+$/, '');
+const API_KEY = process.env.WEB_API_KEY || process.env.NEXT_PUBLIC_WEB_API_KEY || '';
+
+export const dynamicParams = true;
+export const revalidate = 3600; // ISR cache 1 jam
+
+// Pre-render slug produk saat build agar bot bisa merayapi instan (<100ms)
+export async function generateStaticParams() {
+  const reqHeaders = {};
+  if (API_KEY) reqHeaders['X-Api-Key'] = API_KEY;
 
   try {
-    const res = await fetch(`${API_URL}/products/public/${slug}`, {
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Api-Key': API_KEY || ''
-      },
-      cache: 'no-store'
+    const res = await fetch(`${API_URL}/products/public?limit=100`, {
+      headers: reqHeaders,
+      next: { revalidate: 3600 },
+    });
+    if (!res.ok) return [];
+    const json = await res.json();
+    const products = json.data || (Array.isArray(json) ? json : []);
+    return products
+      .filter(p => p && p.slug && typeof p.slug === 'string' && p.slug.trim() !== '')
+      .map(p => ({ slug: p.slug.trim() }));
+  } catch (e) {
+    console.error('generateStaticParams error:', e);
+    return [];
+  }
+}
+
+// --- Fetch Detail Produk ---
+async function getProductDetail(slug) {
+  if (!slug) return null;
+  const reqHeaders = { 'Content-Type': 'application/json' };
+  if (API_KEY) reqHeaders['X-Api-Key'] = API_KEY;
+
+  try {
+    const res = await fetch(`${API_URL}/products/public/${encodeURIComponent(slug)}`, {
+      headers: reqHeaders,
+      next: { revalidate: 3600 }, // Gunakan ISR daripada no-store untuk TTFB kencang
     });
 
     if (!res.ok) return null;
-
-    const json = await res.json();
-
-    // PERBAIKAN: Langsung return json karena backend mengirim object produk langsung
-    return json;
-
+    return await res.json();
   } catch (error) {
     console.error("Fetch Error:", error);
     return null;
@@ -36,15 +60,16 @@ async function getProductDetail(slug) {
 
 // --- Fetch Rekomendasi (Related Products) ---
 async function getRelatedProducts() {
-  const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
-  const API_KEY = process.env.WEB_API_KEY;
+  const reqHeaders = {};
+  if (API_KEY) reqHeaders['X-Api-Key'] = API_KEY;
+
   try {
     const res = await fetch(`${API_URL}/products/public?limit=4`, {
-      headers: { 'X-Api-Key': API_KEY || '' },
-      next: { revalidate: 3600 } // Cache 1 jam agar ringan
+      headers: reqHeaders,
+      next: { revalidate: 3600 }
     });
+    if (!res.ok) return [];
     const json = await res.json();
-    console.log("product", json.data)
     return json.data || [];
   } catch (e) { return []; }
 }
@@ -62,10 +87,10 @@ export async function generateMetadata({ params }) {
   }
 
   // Jika produk ditemukan, buat metadata yang kaya & dinamis
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskarasprei.shop';
-  const productUrl = `${siteUrl}/shop/${product.slug}`;
+  const productUrl = `${siteUrl}/shop/${encodeURIComponent(product.slug)}`;
   const productDescription = product.meta_description || product.description?.substring(0, 160) || sharedMetadata.description;
-  const productImages = product.banner_image ? [product.banner_image] : sharedMetadata.openGraph.images.map(img => img.url);
+  const rawImages = product.banner_image ? [product.banner_image] : sharedMetadata.openGraph.images.map(img => img.url);
+  const productImages = rawImages.filter(img => typeof img === 'string' && img.startsWith('http'));
 
   return {
     // Title akan otomatis menjadi "Nama Produk | Ameskara Sprei"
@@ -79,7 +104,7 @@ export async function generateMetadata({ params }) {
 
     // Metadata untuk social sharing (WhatsApp, Facebook, dll)
     openGraph: {
-      ...sharedMetadata.openGraph, // Mewarisi pengaturan default
+      ...sharedMetadata.openGraph,
       title: `${product.name} | Ameskara Sprei`,
       description: productDescription,
       url: productUrl,
@@ -91,7 +116,7 @@ export async function generateMetadata({ params }) {
 
     // Metadata untuk Twitter Card
     twitter: {
-      ...sharedMetadata.twitter, // Mewarisi pengaturan default
+      ...sharedMetadata.twitter,
       title: `${product.name} | Ameskara Sprei`,
       description: productDescription,
       images: productImages,
@@ -111,15 +136,20 @@ export default async function ProductDetailPage({ params }) {
     notFound(); // Redirect ke halaman 404 Next.js
   }
 
-  // JSON-LD Product Structured Data
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskarasprei.shop';
+  const productUrl = `${siteUrl}/shop/${encodeURIComponent(product.slug)}`;
+  const rawImages = product.banner_image ? [product.banner_image] : [];
+  const validImages = rawImages.filter(img => typeof img === 'string' && img.startsWith('http'));
+
+  // JSON-LD Product Structured Data (Google Merchant & Search Rich Results)
   const productJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: product.name,
-    description: product.description || '',
-    image: product.banner_image ? [product.banner_image] : [],
-    url: `${siteUrl}/shop/${product.slug}`,
+    description: product.description || product.meta_description || '',
+    image: validImages,
+    url: productUrl,
+    sku: `AMESKARA-${product.id}`,
+    productID: String(product.id),
     brand: {
       '@type': 'Brand',
       name: 'Ameskara',
@@ -127,9 +157,11 @@ export default async function ProductDetailPage({ params }) {
     category: product.category_name || 'Sprei',
     offers: {
       '@type': 'Offer',
-      url: `${siteUrl}/shop/${product.slug}`,
+      url: productUrl,
       priceCurrency: 'IDR',
-      price: product.price,
+      price: Number(product.price),
+      priceValidUntil: '2028-12-31',
+      itemCondition: 'https://schema.org/NewCondition',
       availability: product.stock > 0
         ? 'https://schema.org/InStock'
         : 'https://schema.org/OutOfStock',
@@ -140,11 +172,59 @@ export default async function ProductDetailPage({ params }) {
     },
   };
 
+  // JSON-LD BreadcrumbList Structured Data
+  const breadcrumbElements = [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: siteUrl,
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Shop',
+      item: `${siteUrl}/shop`,
+    },
+  ];
+
+  if (product.category_name) {
+    breadcrumbElements.push({
+      '@type': 'ListItem',
+      position: 3,
+      name: product.category_name,
+      item: `${siteUrl}/shop?category=${encodeURIComponent(product.category_slug || '')}`,
+    });
+    breadcrumbElements.push({
+      '@type': 'ListItem',
+      position: 4,
+      name: product.name,
+      item: productUrl,
+    });
+  } else {
+    breadcrumbElements.push({
+      '@type': 'ListItem',
+      position: 3,
+      name: product.name,
+      item: productUrl,
+    });
+  }
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbElements,
+  };
+
   return (
     <div className="bg-background-light min-h-screen font-display text-text-main pb-12 sm:pb-20">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
 

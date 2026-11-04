@@ -1,12 +1,13 @@
 export default function robots() {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskarasprei.shop';
+  const rawSiteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskarasprei.shop';
+  const siteUrl = rawSiteUrl.replace(/\/+$/, '');
 
   return {
     rules: [
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/checkout', '/_next/'],
+        disallow: ['/api/', '/checkout'],
       },
       {
         userAgent: 'Googlebot',

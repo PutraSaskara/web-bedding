@@ -3,28 +3,30 @@ import Image from 'next/image';
 
 // --- Fetch Articles ---
 async function getArticles() {
-  const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
-  const API_KEY = process.env.WEB_API_KEY;
+  const rawApiUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/api';
+  const API_URL = rawApiUrl.replace(/\/+$/, '');
+  const API_KEY = process.env.WEB_API_KEY || process.env.NEXT_PUBLIC_WEB_API_KEY || '';
+
+  const reqHeaders = {};
+  if (API_KEY) reqHeaders['X-Api-Key'] = API_KEY;
 
   try {
-    // Asumsi endpoint public artikel adalah /articles/public
-    // Jika endpoint kamu berbeda (misal /articles saja), sesuaikan url ini
     const res = await fetch(`${API_URL}/articles/public`, { 
-      headers: { 'X-Api-Key': API_KEY || '' },
-      cache: 'no-store' 
+      headers: reqHeaders,
+      next: { revalidate: 3600 } 
     });
 
     if (!res.ok) return [];
     const json = await res.json();
-    return json.data || [];
+    return json.data || (Array.isArray(json) ? json : []);
   } catch (error) {
     console.error("Gagal fetch artikel:", error);
     return [];
   }
 }
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskarasprei.shop';
-
+const rawSiteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskarasprei.shop';
+const siteUrl = rawSiteUrl.replace(/\/+$/, '');
 export const metadata = {
   title: "Journal - Tips Tidur & Inspirasi Dekorasi",
   description: "Baca artikel tips tidur nyenyak, inspirasi dekorasi kamar tidur, dan panduan perawatan sprei dari Ameskara. Update rutin untuk kenyamanan tidur Anda.",
@@ -73,6 +75,7 @@ export default async function JournalPage() {
                                         src={article.thumbnail} 
                                         alt={article.title} 
                                         fill 
+                                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                         className="object-cover group-hover:scale-105 transition-transform duration-500"
                                     />
                                 ) : (

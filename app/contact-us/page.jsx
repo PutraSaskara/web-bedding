@@ -1,8 +1,8 @@
 import React from 'react';
 import ContactForm from '../../components/ContactForm';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskarasprei.shop';
-
+const rawSiteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskarasprei.shop';
+const siteUrl = rawSiteUrl.replace(/\/+$/, '');
 export const metadata = {
   title: 'Hubungi Kami',
   description: 'Hubungi tim Ameskara Sprei untuk pertanyaan seputar produk, pesanan, atau kemitraan. Kami siap membantu Anda melalui email dan WhatsApp.',

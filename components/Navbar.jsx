@@ -44,6 +44,7 @@ export default function Navbar() {
                 alt="Ameskara Logo"
                 width={70}
                 height={70}
+                priority
                 className="md:w-16 md:h-16 w-12 h-12 object-contain transition-transform duration-300 group-hover:scale-105"
               />
             </Link>

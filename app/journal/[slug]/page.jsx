@@ -4,15 +4,47 @@ import { notFound } from 'next/navigation';
 import ArticleRenderer from '../components/ArticleRenderer';
 import ArticleShare from '../components/ArticleShare';
 
-// --- Fetch Detail Article ---
-async function getArticleDetail(slug) {
-  const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
-  const API_KEY = process.env.WEB_API_KEY;
+export const dynamicParams = true;
+export const revalidate = 3600;
+
+export async function generateStaticParams() {
+  const rawApiUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/api';
+  const API_URL = rawApiUrl.replace(/\/+$/, '');
+  const API_KEY = process.env.WEB_API_KEY || process.env.NEXT_PUBLIC_WEB_API_KEY || '';
+
+  const reqHeaders = {};
+  if (API_KEY) reqHeaders['X-Api-Key'] = API_KEY;
 
   try {
-    const res = await fetch(`${API_URL}/articles/public/${slug}`, {
-      headers: { 'X-Api-Key': API_KEY || '' },
-      cache: 'no-store'
+    const res = await fetch(`${API_URL}/articles/public`, {
+      headers: reqHeaders,
+      next: { revalidate: 3600 },
+    });
+    if (!res.ok) return [];
+    const json = await res.json();
+    const articles = json.data || (Array.isArray(json) ? json : []);
+    return articles
+      .filter((a) => a && a.slug && typeof a.slug === 'string' && a.slug.trim() !== '')
+      .map((a) => ({ slug: a.slug.trim() }));
+  } catch (e) {
+    return [];
+  }
+}
+
+// --- Fetch Detail Article ---
+async function getArticleDetail(slug) {
+  if (!slug) return null;
+  const rawApiUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/api';
+  const API_URL = rawApiUrl.replace(/\/+$/, '');
+  const API_KEY = process.env.WEB_API_KEY || process.env.NEXT_PUBLIC_WEB_API_KEY || '';
+
+  const reqHeaders = {};
+  if (API_KEY) reqHeaders['X-Api-Key'] = API_KEY;
+
+  try {
+    const res = await fetch(`${API_URL}/articles/public/${encodeURIComponent(slug)}`, {
+      headers: reqHeaders,
+      next: { revalidate: 3600 },
     });
 
     if (!res.ok) return null;
@@ -20,7 +52,7 @@ async function getArticleDetail(slug) {
     const article = json.data;
 
     // Parsing Content JSON string -> Object
-    if (typeof article.content === 'string') {
+    if (typeof article?.content === 'string') {
         try {
             article.content = JSON.parse(article.content);
         } catch (e) {
@@ -37,9 +69,9 @@ export async function generateMetadata({ params }) {
   const article = await getArticleDetail(params.slug);
   if (!article) return { title: 'Article Not Found' };
   
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskarasprei.shop';
-  const articleUrl = `${siteUrl}/journal/${article.slug}`;
-
+  const rawSiteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskarasprei.shop';
+  const siteUrl = rawSiteUrl.replace(/\/+$/, '');
+  const articleUrl = `${siteUrl}/journal/${encodeURIComponent(article.slug)}`;
   return {
     title: `${article.title} | Ameskara Journal`,
     description: article.excerpt,
@@ -92,6 +124,7 @@ export default async function ArticleDetailPage({ params }) {
                         src={article.thumbnail} 
                         alt={article.title} 
                         fill 
+                        sizes="(max-width: 896px) 100vw, 896px"
                         className="object-cover"
                         priority
                       />

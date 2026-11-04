@@ -133,7 +133,7 @@ export default function ProductView({ product }) {
             onClick={() => setIsModalOpen(true)}
           >
             {activeImage ? (
-              <Image src={activeImage} alt={product.name} fill className="object-cover transition-transform duration-500 group-hover:scale-105" priority />
+              <Image src={activeImage} alt={product.name} fill sizes="(max-width: 1024px) 100vw, 500px" className="object-cover transition-transform duration-500 group-hover:scale-105" priority />
             ) : (
                <div className="flex items-center justify-center h-full text-text-soft">No Image</div>
             )}
@@ -163,7 +163,7 @@ export default function ProductView({ product }) {
                     activeImage === img ? 'border-primary' : 'border-transparent opacity-70 hover:opacity-100'
                   }`}
                 >
-                  <Image src={img} alt={`Thumb ${idx}`} fill className="object-cover" />
+                  <Image src={img} alt={`Thumb ${idx}`} fill sizes="80px" className="object-cover" />
                 </button>
              ))}
           </div>

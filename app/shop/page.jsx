@@ -2,7 +2,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import ShopControls from './components/ShopControls';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskarasprei.shop';
+const rawSiteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskarasprei.shop';
+const siteUrl = rawSiteUrl.replace(/\/+$/, '');
 
 export const metadata = {
   title: 'Belanja Sprei & Bedcover Premium',
@@ -22,9 +23,10 @@ export const metadata = {
 
 // 1. Fetch Kategori
 async function getCategories() {
-  const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+  const rawApiUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/api';
+  const API_URL = rawApiUrl.replace(/\/+$/, '');
   try {
-    const res = await fetch(`${API_URL}/categories`, { cache: 'no-store' });
+    const res = await fetch(`${API_URL}/categories`, { next: { revalidate: 3600 } });
     return res.ok ? await res.json() : [];
   } catch (e) {
     console.error("Gagal fetch kategori:", e);
@@ -34,8 +36,9 @@ async function getCategories() {
 
 // 2. Fetch Produk (Dengan Search, Filter, & Password API Key)
 async function getPublicProducts(search, category, page) {
-  const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
-  const API_KEY = process.env.WEB_API_KEY; // Ambil Password API
+  const rawApiUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/api';
+  const API_URL = rawApiUrl.replace(/\/+$/, '');
+  const API_KEY = process.env.WEB_API_KEY || process.env.NEXT_PUBLIC_WEB_API_KEY || '';
 
   const params = new URLSearchParams();
   if (search) params.set('search', search);
@@ -43,14 +46,14 @@ async function getPublicProducts(search, category, page) {
   params.set('page', page);
   params.set('limit', 12); // Tampilkan 12 produk per grid
 
+  const reqHeaders = { 'Content-Type': 'application/json' };
+  if (API_KEY) reqHeaders['X-Api-Key'] = API_KEY;
+
   try {
     const res = await fetch(`${API_URL}/products/public?${params.toString()}`, {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Api-Key': API_KEY || '' // <--- INI PASSWORDNYA
-      },
-      cache: 'no-store'
+      headers: reqHeaders,
+      next: { revalidate: 300 }
     });
 
     if (!res.ok) return { data: [], pagination: {} };

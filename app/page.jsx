@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskarasprei.shop';
-
+const rawSiteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskarasprei.shop';
+const siteUrl = rawSiteUrl.replace(/\/+$/, '');
 // SEO Metadata for Home Page
 export const metadata = {
   title: 'Ameskara Sprei - Sprei & Bedcover Premium Berkualitas Tinggi',
@@ -65,13 +65,17 @@ function HomeJsonLd() {
 
 // --- FETCH DATA FUNCTION ---
 async function getFeaturedProducts() {
-  const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
-  const API_KEY = process.env.WEB_API_KEY;
+  const rawApiUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/api';
+  const API_URL = rawApiUrl.replace(/\/+$/, '');
+  const API_KEY = process.env.WEB_API_KEY || process.env.NEXT_PUBLIC_WEB_API_KEY || '';
+
+  const reqHeaders = {};
+  if (API_KEY) reqHeaders['X-Api-Key'] = API_KEY;
 
   try {
     const res = await fetch(`${API_URL}/products/public?limit=10`, {
-      headers: { 'X-Api-Key': API_KEY || '' },
-      cache: 'no-store' 
+      headers: reqHeaders,
+      next: { revalidate: 300 } // Gunakan ISR agar respon instan (<30ms)
     });
 
     if (!res.ok) return [];
@@ -94,10 +98,15 @@ export default async function Home() {
         {/* --- Hero Section --- */}
         <section className="relative h-[85vh] sm:h-[90vh] flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 z-0">
-            <div 
-              className="absolute inset-0 bg-cover bg-center transition-transform duration-[2000ms] scale-105 hover:scale-100" 
-              style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuAp4eCH8FxGGfQeYjogXl2NOQe55ycYfvwPfEcaA7XCPsl_nActcknwJY-2AxZrIgHGorP71HiaBoT3IMPe6G39gtkrwlGNarJ9APm9mD5NcM3MSji868FJCnFXuk9IitBIGpqYqQTlbTd8gPXu-l2UsBlJ7RhCyNU7pFGflYzk_tTZHGcoN1f79vztC5p-9B6Bqm9mSb4gnGoAHlhevu1R5n9CC-hE9_-wkpPISWO5HbgAZD1bCfxKj2zmlKhVEXPxMEE4CA8zyak")' }}
-            ></div>
+            <Image
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAp4eCH8FxGGfQeYjogXl2NOQe55ycYfvwPfEcaA7XCPsl_nActcknwJY-2AxZrIgHGorP71HiaBoT3IMPe6G39gtkrwlGNarJ9APm9mD5NcM3MSji868FJCnFXuk9IitBIGpqYqQTlbTd8gPXu-l2UsBlJ7RhCyNU7pFGflYzk_tTZHGcoN1f79vztC5p-9B6Bqm9mSb4gnGoAHlhevu1R5n9CC-hE9_-wkpPISWO5HbgAZD1bCfxKj2zmlKhVEXPxMEE4CA8zyak"
+              alt="Ameskara Sprei Kamar Tidur Estetik"
+              fill
+              priority
+              sizes="100vw"
+              quality={80}
+              className="object-cover object-center transition-transform duration-[2000ms] scale-105 hover:scale-100"
+            />
             <div className="absolute inset-0 bg-black/30 backdrop-blur-[2px]"></div>
           </div>
           
@@ -153,6 +162,7 @@ export default async function Home() {
                   src={item.img} 
                   alt={item.name} 
                   fill 
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 25vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity"></div>
@@ -245,7 +255,8 @@ export default async function Home() {
                 <Image 
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQegTQD2FsuX7mGKrFx81pMj11kTf264Dvi4sb9Nu3PJx-ytkS7JHziIKdcFv89vORJvJXUMvJLHI9gR-kPIFjv1twO6H-X7-Qa5csBVKLYCstMIAWovXKKyzw93pUehBnMyMP9yz9ws5SdJ-pR2WvozwTRJE004xziZbKuuiQJRsHN3OZom70phJ902bPD0i2ZcF2tvBCrO7rosCRtaHuNySAjpFqYhUF2yAvq4HXdI3dokAp1SWBvhZ63xeL1pAplJv8QhIW9IM" 
                   alt="Quality details"
-                  fill
+                  fill 
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover"
                 />
              </div>
@@ -297,6 +308,7 @@ export default async function Home() {
                     src={img.src} 
                     alt={`Gallery ${i}`} 
                     fill
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 25vw"
                     className="object-cover transition-transform duration-[1.5s] group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-4">
