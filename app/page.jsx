@@ -88,8 +88,24 @@ async function getFeaturedProducts() {
   }
 }
 
+async function getCategories() {
+  const rawApiUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/api';
+  const API_URL = rawApiUrl.replace(/\/+$/, '');
+  try {
+    const res = await fetch(`${API_URL}/categories`, { next: { revalidate: 3600 } });
+    if (!res.ok) return [];
+    return await res.json();
+  } catch (e) {
+    console.error("Gagal mengambil kategori:", e);
+    return [];
+  }
+}
+
 export default async function Home() {
-  const products = await getFeaturedProducts();
+  const [products, categories] = await Promise.all([
+    getFeaturedProducts(),
+    getCategories()
+  ]);
 
   return (
     <div className="flex flex-col min-h-screen font-display text-text-main overflow-x-hidden">
@@ -139,40 +155,82 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* --- Shop By Mood (Thematic Grid) --- */}
+        {/* --- Explore Collections (Shop by Category) --- */}
         <section className="py-20 sm:py-32 px-4 sm:px-6 lg:px-8 max-w-[1440px] mx-auto">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16">
             <div className="max-w-2xl">
-              <h2 className="text-text-main dark:text-white text-3xl sm:text-5xl font-black tracking-tighter mb-4">Shop by Mood</h2>
+              <span className="text-primary font-bold tracking-widest uppercase text-xs sm:text-sm mb-2 block">
+                Katalog Pilihan
+              </span>
+              <h2 className="text-text-main dark:text-white text-3xl sm:text-5xl font-black tracking-tighter mb-4">
+                Jelajahi Koleksi
+              </h2>
               <p className="text-text-soft dark:text-gray-400 text-base sm:text-xl leading-relaxed">
-                Setiap warna membawa energi yang berbeda. Temukan suasana yang paling sesuai dengan gaya hidup dan ketenangan Anda.
+                Temukan sprei, bedcover, dan perlengkapan tidur yang dirancang khusus untuk kenyamanan istirahat Anda.
               </p>
             </div>
+            <Link
+              href="/shop"
+              className="mt-4 md:mt-0 inline-flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all text-sm sm:text-base group"
+            >
+              Lihat Semua Katalog
+              <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">
+                arrow_forward
+              </span>
+            </Link>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-6">
-            {[
-              { name: 'Terracotta', mood: 'Warmth & Energy', color: 'bg-terracotta', img: '/mood/terracotta.png', cat: 'terracotta' },
-              { name: 'Sage Green', mood: 'Calm & Nature', color: 'bg-sage', img: '/mood/sage.png', cat: 'sage' },
-              { name: 'Oatmeal', mood: 'Neutral & Soft', color: 'bg-oatmeal', img: '/mood/oatmeal.png', cat: 'oatmeal' },
-              { name: 'Soft Mustard', mood: 'Sunny & Bright', color: 'bg-mustard', img: '/mood/mustard.png', cat: 'mustard' },
-            ].map((item, idx) => (
-              <Link key={idx} href={`/shop?category=${item.cat}`} className="group relative aspect-square sm:aspect-[4/5] overflow-hidden rounded-xl sm:rounded-3xl bg-gray-100 shadow-soft transition-all duration-500 hover:shadow-2xl">
-                <Image 
-                  src={item.img} 
-                  alt={item.name} 
-                  fill 
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 25vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity"></div>
-                <div className="absolute bottom-0 left-0 w-full p-3 sm:p-8 transform transition-transform duration-500 group-hover:-translate-y-2">
-                  <h3 className="text-white text-sm sm:text-2xl font-bold mb-0.5 sm:mb-1">{item.name}</h3>
-                  <p className="text-white/80 text-[10px] sm:text-sm font-medium tracking-wide uppercase">{item.mood}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
+          {categories.length > 0 ? (
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+              {categories.map((cat, idx) => {
+                // Ambil banner produk jika ada produk di kategori ini, atau gunakan fallback visual tekstur linen
+                const matchedProduct = products.find(
+                  (p) => p.category_id === cat.id || p.category_slug === cat.slug
+                );
+                const defaultMoodImages = [
+                  '/mood/terracotta.png',
+                  '/mood/sage.png',
+                  '/mood/oatmeal.png',
+                  '/mood/mustard.png',
+                ];
+                const cardImage =
+                  matchedProduct?.banner_image || defaultMoodImages[idx % defaultMoodImages.length];
+
+                return (
+                  <Link
+                    key={cat.id || idx}
+                    href={`/shop?category=${encodeURIComponent(cat.slug)}`}
+                    className="group relative aspect-square sm:aspect-[4/5] overflow-hidden rounded-xl sm:rounded-3xl bg-gray-100 shadow-soft transition-all duration-500 hover:shadow-2xl"
+                  >
+                    <Image
+                      src={cardImage}
+                      alt={cat.name}
+                      fill
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 25vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent opacity-70 group-hover:opacity-85 transition-opacity"></div>
+                    <div className="absolute bottom-0 left-0 w-full p-4 sm:p-7 transform transition-transform duration-500 group-hover:-translate-y-1">
+                      <span className="text-white/70 text-[10px] sm:text-xs font-semibold tracking-wider uppercase block mb-1">
+                        Kategori
+                      </span>
+                      <h3 className="text-white text-base sm:text-2xl font-bold mb-1 sm:mb-2 leading-tight">
+                        {cat.name}
+                      </h3>
+                      <span className="inline-flex items-center gap-1 text-primary text-xs sm:text-sm font-bold group-hover:underline">
+                        Jelajahi Produk
+                        <span className="material-symbols-outlined text-xs sm:text-sm">arrow_forward</span>
+                      </span>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="text-center py-12 bg-white rounded-2xl border border-gray-100">
+              <p className="text-text-soft text-sm">Sedang memuat koleksi kategori...</p>
+            </div>
+          )}
         </section>
 
         {/* --- Bestsellers (Grid View) --- */}
@@ -292,7 +350,17 @@ export default async function Home() {
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12 sm:mb-20">
               <h2 className="text-text-main dark:text-white text-3xl sm:text-5xl font-black tracking-tighter mb-4">Di Kamar Anda</h2>
-              <p className="text-text-soft dark:text-gray-400 text-base sm:text-xl">Bagikan momen nyaman Anda bersama kami. Tag @ameskarasprei.id</p>
+              <p className="text-text-soft dark:text-gray-400 text-base sm:text-xl">
+                Bagikan momen nyaman Anda bersama kami. Tag{' '}
+                <a
+                  href="https://www.instagram.com/reel/DXrb6VjgrtU/?cplk=MXRzcjB6N3RxZGRqeA=="
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary font-bold hover:underline"
+                >
+                  @ameskarasprei.shop
+                </a>
+              </p>
             </div>
             
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 auto-rows-[200px] sm:auto-rows-[300px]">
@@ -303,7 +371,13 @@ export default async function Home() {
                 { src: "https://lh3.googleusercontent.com/aida-public/AB6AXuBSlnySBcmbNrWXBa-yEWkncEUakrmoeGVvN9LETgMDDed0n7zhP8LheIlgkPSpCNflWE5ORJQqJ85555ZDcbWeV9ktNSW5kpFfJu180QaX_9UXPbUdN4pgJGpyUgxbSZSmBPP1fyRcdBlqj9VVapNbQjEr8P0kXautaL1UMm0V2tMGzJ7flT3cafxj4uk4p4H6lWzXUfbR5w5-d31qzeuv-Mklmo2_LmAaOH6XT0Fys7sCY8SEgL1QP1BUNhd_jdXC-QMLVOMAdsM", span: "md:col-start-3" },
                 { src: "https://lh3.googleusercontent.com/aida-public/AB6AXuDkmvTe_B8DIrtW7UBWOgj3x41rqm3zRQgGScN5s5arwcJMvkdKmKjBxbwRHOXgGZCUhMAaObu9kx38ZfNUWrTNssvKwx4rMsYxYY68YEIh02JGjBwMw2naHbtFwqqY_i0sMUxsfqMqPUDdFXWU6MKgt6iKcxk0WyWRFn3Cj2gthk-4N2kQFUTWnJOgiJIrU5hiJemNLz5xg4xJKiYBUfb-6KghFON_bXsUOH3mNqAPRmmVfFGpUunmIch8ydBare3OfIyMocNpwAw", span: "md:col-start-4" },
               ].map((img, i) => (
-                <div key={i} className={`relative group overflow-hidden rounded-3xl shadow-soft ${img.span}`}>
+                <a
+                  key={i}
+                  href="https://www.instagram.com/reel/DXrb6VjgrtU/?cplk=MXRzcjB6N3RxZGRqeA=="
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`relative group overflow-hidden rounded-3xl shadow-soft block ${img.span}`}
+                >
                   <Image 
                     src={img.src} 
                     alt={`Gallery ${i}`} 
@@ -312,9 +386,12 @@ export default async function Home() {
                     className="object-cover transition-transform duration-[1.5s] group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-4">
-                    <span className="text-white font-bold text-center text-xs sm:text-base">Shop the Look</span>
+                    <span className="text-white font-bold text-center text-xs sm:text-base inline-flex items-center gap-1.5">
+                      Lihat di Instagram
+                      <span className="material-symbols-outlined text-sm">open_in_new</span>
+                    </span>
                   </div>
-                </div>
+                </a>
               ))}
             </div>
           </div>

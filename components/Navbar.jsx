@@ -33,6 +33,25 @@ export default function Navbar() {
 
   return (
     <>
+      {/* --- Top Announcement Bar --- */}
+      <div className="bg-[#2D2A26] text-white text-[11px] sm:text-xs py-2 px-3 font-medium transition-colors border-b border-black/10">
+        <div className="max-w-[1440px] mx-auto flex items-center justify-center text-center gap-1.5 sm:gap-2">
+          <span className="text-primary">✨</span>
+          <span className="tracking-wide">Pengiriman dari Bali ke Seluruh Indonesia</span>
+          <span className="hidden md:inline text-white/30">•</span>
+          <span className="hidden md:inline text-white/90">Konsultasi Ukuran & Bahan Gratis</span>
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary hover:underline font-bold inline-flex items-center gap-0.5 ml-1 shrink-0"
+          >
+            Chat WA
+            <span className="material-symbols-outlined text-[12px] sm:text-[14px]">arrow_forward</span>
+          </a>
+        </div>
+      </div>
+
       <nav className="sticky top-0 z-50 w-full glass border-b border-[#f4f2f0]/50 dark:border-white/5">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 sm:h-20">

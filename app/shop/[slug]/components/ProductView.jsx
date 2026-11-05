@@ -19,8 +19,8 @@ export default function ProductView({ product }) {
   const [selectedSize, setSelectedSize] = useState(null); 
   const [quantity, setQuantity] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
   const [showToast, setShowToast] = useState(false);
-
   const basePrice = Number(product.price);
   const price = selectedSize && selectedSize.price ? Number(selectedSize.price) : basePrice;
 
@@ -51,13 +51,16 @@ export default function ProductView({ product }) {
 
   useEffect(() => {
     const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        if (isModalOpen) setIsModalOpen(false);
+        if (isSizeGuideOpen) setIsSizeGuideOpen(false);
+      }
       if (!isModalOpen) return;
       if (e.key === 'ArrowRight') handleNextImage();
       if (e.key === 'ArrowLeft') handlePrevImage();
-      if (e.key === 'Escape') setIsModalOpen(false);
     };
 
-    if (isModalOpen) {
+    if (isModalOpen || isSizeGuideOpen) {
       document.body.style.overflow = 'hidden';
       window.addEventListener('keydown', handleKeyDown);
     } else {
@@ -68,7 +71,7 @@ export default function ProductView({ product }) {
       window.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = 'unset';
     };
-  }, [isModalOpen, currentImageIndex]);
+  }, [isModalOpen, isSizeGuideOpen, currentImageIndex]);
 
   // --- LOGIC PRODUK UTAMA ---
   const handleVariantChange = (variant) => {
@@ -243,9 +246,15 @@ export default function ProductView({ product }) {
                <div>
                   <div className="flex justify-between items-center mb-2 sm:mb-3">
                       <label className="text-xs sm:text-sm font-bold text-text-main">Select Size</label>
-                      <span className="text-[10px] sm:text-xs text-text-soft font-medium cursor-pointer underline hover:text-primary">Size Guide</span>
+                      <button 
+                        type="button" 
+                        onClick={() => setIsSizeGuideOpen(true)} 
+                        className="text-[10px] sm:text-xs text-primary font-bold hover:underline inline-flex items-center gap-1 cursor-pointer transition-colors"
+                      >
+                        <span className="material-symbols-outlined text-[14px]">straighten</span>
+                        Size Guide
+                      </button>
                   </div>
-                  
                   <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 sm:gap-3">
                       {selectedVariant.sizes.map((s, idx) => {
                           const isAvailable = s.stock > 0;
@@ -358,7 +367,106 @@ export default function ProductView({ product }) {
         </div>
       )}
 
-    
+      {/* ========================================= */}
+      {/* 📏 MODAL SIZE GUIDE (PANDUAN UKURAN KASUR) */}
+      {/* ========================================= */}
+      {isSizeGuideOpen && (
+        <div 
+          className="fixed inset-0 z-[120] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto animate-in fade-in duration-200"
+          onClick={() => setIsSizeGuideOpen(false)}
+        >
+          <div 
+            className="bg-white dark:bg-background-dark text-text-main dark:text-white rounded-2xl max-w-lg w-full p-5 sm:p-7 shadow-2xl relative my-8 border border-gray-100 max-h-[90vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button 
+              onClick={() => setIsSizeGuideOpen(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-text-main dark:hover:text-white p-1 rounded-full hover:bg-gray-100 dark:hover:bg-white/10 transition-colors"
+              title="Tutup Panduan"
+            >
+              <span className="material-symbols-outlined text-xl">close</span>
+            </button>
+
+            {/* Modal Header */}
+            <div className="mb-5 sm:mb-6">
+              <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center mb-3">
+                <span className="material-symbols-outlined text-xl">straighten</span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-black tracking-tight">Panduan Ukuran Sprei</h3>
+              <p className="text-xs sm:text-sm text-text-soft mt-1">
+                Sesuaikan pilihan ukuran dengan dimensi kasur tempat tidur Anda.
+              </p>
+            </div>
+
+            {/* Sizing Table */}
+            <div className="overflow-x-auto border border-gray-100 rounded-xl mb-5">
+              <table className="w-full text-left text-xs sm:text-sm">
+                <thead className="bg-gray-50 dark:bg-white/5 border-b border-gray-100 font-bold text-text-main">
+                  <tr>
+                    <th className="p-3">Ukuran</th>
+                    <th className="p-3">Nama Standar</th>
+                    <th className="p-3">Isi Set</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-100">
+                  <tr className="hover:bg-gray-50/50">
+                    <td className="p-3 font-bold text-primary">90 x 200 cm</td>
+                    <td className="p-3">Single Small</td>
+                    <td className="p-3 text-text-soft">1 Bantal + 1 Guling</td>
+                  </tr>
+                  <tr className="hover:bg-gray-50/50">
+                    <td className="p-3 font-bold text-primary">100 x 200 cm</td>
+                    <td className="p-3">Super Single (No. 4)</td>
+                    <td className="p-3 text-text-soft">1 Bantal + 1 Guling</td>
+                  </tr>
+                  <tr className="hover:bg-gray-50/50">
+                    <td className="p-3 font-bold text-primary">120 x 200 cm</td>
+                    <td className="p-3">Single (No. 3)</td>
+                    <td className="p-3 text-text-soft">1 Bantal + 1 Guling</td>
+                  </tr>
+                  <tr className="hover:bg-gray-50/50">
+                    <td className="p-3 font-bold text-primary">160 x 200 cm</td>
+                    <td className="p-3">Queen (No. 2)</td>
+                    <td className="p-3 text-text-soft">2 Bantal + 2 Guling</td>
+                  </tr>
+                  <tr className="hover:bg-gray-50/50">
+                    <td className="p-3 font-bold text-primary">180 x 200 cm</td>
+                    <td className="p-3">King (No. 1)</td>
+                    <td className="p-3 text-text-soft">2 Bantal + 2 Guling</td>
+                  </tr>
+                  <tr className="hover:bg-gray-50/50">
+                    <td className="p-3 font-bold text-primary">200 x 200 cm</td>
+                    <td className="p-3">Extra King</td>
+                    <td className="p-3 text-text-soft">2 Bantal + 2 Guling</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            {/* Information Notes */}
+            <div className="bg-primary/5 rounded-xl p-3.5 sm:p-4 mb-5 space-y-2 border border-primary/10">
+              <div className="flex items-start gap-2 text-xs sm:text-sm text-text-main">
+                <span className="material-symbols-outlined text-primary text-base shrink-0 mt-0.5">check_circle</span>
+                <span><strong>Tinggi Kasur:</strong> Model <em>fitted sheet</em> dengan karet elastis di 4 sudut, pas untuk tinggi kasur 20–30 cm.</span>
+              </div>
+              <div className="flex items-start gap-2 text-xs sm:text-sm text-text-main">
+                <span className="material-symbols-outlined text-primary text-base shrink-0 mt-0.5">help</span>
+                <span><strong>Bingung Ukuran?</strong> Konsultasikan langsung foto tempat tidur Anda ke admin via WhatsApp saat pemesanan.</span>
+              </div>
+            </div>
+
+            {/* Action button */}
+            <button
+              type="button"
+              onClick={() => setIsSizeGuideOpen(false)}
+              className="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3 rounded-xl transition-colors text-sm shadow-md"
+            >
+              Mengerti, Kembali Pilih Ukuran
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 }
