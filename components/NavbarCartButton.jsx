@@ -17,6 +17,7 @@ export default function NavbarCartButton() {
   return (
     <button 
       onClick={openCart} 
+      aria-label="Keranjang Belanja"
       className="relative flex items-center justify-center w-10 h-10 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors text-text-main dark:text-white"
     >
         <span className="material-symbols-outlined text-[20px]">shopping_bag</span>

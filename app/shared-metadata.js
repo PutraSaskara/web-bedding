@@ -14,12 +14,11 @@ export const sharedMetadata = {
   // Title template — semua halaman akan ikut format ini
   title: {
     template: '%s | Ameskara Sprei',
-    default: 'Ameskara Sprei - Sprei & Bedcover Premium Berkualitas Tinggi',
+    default: 'Ameskara Sprei Bali | Sprei & Bedcover Katun Lembut Premium',
   },
 
   // Deskripsi utama (target 150-160 karakter)
-  description: 'Ameskara menyediakan sprei, bedcover, dan perlengkapan tidur premium dengan bahan lembut, warna tidak mudah luntur, dan desain estetik untuk kenyamanan tidur Anda.',
-
+  description: 'Produsen sprei & bedcover premium di Bali. Bahan katun adem, lembut, warna anti luntur, pas di kasur. Melayani pengiriman ke seluruh Indonesia. Cek koleksinya!',
   // Kata Kunci Utama untuk SEO
   keywords: [
     'sprei premium', 'bedcover', 'sprei aesthetic', 'sprei katun', 
@@ -99,4 +98,12 @@ export const sharedMetadata = {
 
   // Kategori website
   category: 'ecommerce',
+
+  // Local GEO Tags (Denpasar, Bali)
+  other: {
+    'geo.region': 'ID-BA',
+    'geo.placename': 'Denpasar, Bali',
+    'geo.position': '-8.6705;115.2126',
+    ICBM: '-8.6705, 115.2126',
+  },
 };

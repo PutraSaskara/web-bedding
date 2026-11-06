@@ -1,20 +1,16 @@
 import React from 'react';
 import ContactForm from '../../components/ContactForm';
 
-const rawSiteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskarasprei.shop';
-const siteUrl = rawSiteUrl.replace(/\/+$/, '');
-export const metadata = {
-  title: 'Hubungi Kami',
-  description: 'Hubungi tim Ameskara Sprei untuk pertanyaan seputar produk, pesanan, atau kemitraan. Kami siap membantu Anda melalui email dan WhatsApp.',
-  alternates: {
-    canonical: `${siteUrl}/contact-us`,
-  },
-  openGraph: {
-    title: 'Hubungi Kami | Ameskara Sprei',
-    description: 'Hubungi tim Ameskara Sprei untuk pertanyaan seputar produk, pesanan, atau kemitraan.',
-    url: `${siteUrl}/contact-us`,
-  },
-};
+import { getSeoMetadata } from '../../lib/seo';
+
+export async function generateMetadata() {
+  return await getSeoMetadata(
+    'contact-us',
+    'Kontak & Pemesanan Sprei Ameskara | Denpasar Selatan Bali',
+    'Hubungi layanan pelanggan Ameskara Sprei Denpasar Bali. Konsultasi ukuran kasur, pemesanan sprei & bedcover custom, serta konfirmasi order cepat via WhatsApp.',
+    '/contact-us'
+  );
+}
 
 export default function ContactUsPage() {
   return (

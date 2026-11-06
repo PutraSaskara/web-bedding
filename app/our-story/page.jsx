@@ -1,21 +1,16 @@
 import Link from "next/link";
 import Image from "next/image";
 
-// Metadata yang dioptimalkan untuk SEO dan social sharing
-export const metadata = {
-  title: "Cerita Kami", // Akan menjadi "Cerita Kami | Ameskara Sprei"
-  description: "Perjalanan Ameskara Sprei berawal dari Bali, terinspirasi konsep 'Slow Living' untuk membawa ketenangan dan kenyamanan premium ke kamar tidur Anda.",
-  // Metadata untuk social sharing (Open Graph)
-  openGraph: {
-    title: "Cerita Kami | Ameskara Sprei",
-    description: "Perjalanan Ameskara Sprei berawal dari Bali, terinspirasi konsep 'Slow Living' untuk membawa ketenangan dan kenyamanan premium ke kamar tidur Anda.",
-    // Menggunakan gambar spesifik untuk halaman ini
-    images: [{
-      url: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDBV3l7I99e2VzFX6ZAqfVbbDOXsuz9UnrVtX38DyveEkqO5IThmVs0Xqm4whD0riQS0myJ2HDCb8FnvMxQZuk2_nO9f4czC_sNH6eH1hzdf_4BbqqP4hH1ONr3JMuAYx0CYj_z9aXvdjFVKYc9XAfA5kyP8eJ1yysL9KFbh4EYxlx_kKTMDOV9iioGrrps0kd6G0X9ERXpvAZfWxiTqRj0p6f4fWslg7yVvt1NdYleKw2-5RyVLncr5epVY8yEQJjItq7ct462-pI',
-      alt: 'Detail kain premium Ameskara Sprei'
-    }],
-  }
-};
+import { getSeoMetadata } from "../../lib/seo";
+
+export async function generateMetadata() {
+  return await getSeoMetadata(
+    'our-story',
+    'Cerita Brand Ameskara | Produsen Sprei Bali Slow Living',
+    'Kisah Ameskara menghadirkan sprei premium dari Bali berkonsep slow living. Dibuat dengan bahan pilihan untuk kualitas istirahat maksimal. Pelajari cerita kami.',
+    '/our-story'
+  );
+}
 
 export default function OurStoryPage() {
   return (

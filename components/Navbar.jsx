@@ -69,12 +69,12 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop Nav Links */}
-            <div className="hidden md:flex items-center gap-10">
-              <Link href="/shop" className="text-text-main/80 dark:text-white/80 text-[13px] font-semibold tracking-wider uppercase hover:text-primary transition-colors">Shop Bedding</Link>
-              <Link href="/our-story" className="text-text-main/80 dark:text-white/80 text-[13px] font-semibold tracking-wider uppercase hover:text-primary transition-colors">Our Story</Link>
-              <Link href="/journal" className="text-text-main/80 dark:text-white/80 text-[13px] font-semibold tracking-wider uppercase hover:text-primary transition-colors">Journal</Link>
+            <div className="hidden md:flex items-center gap-8 lg:gap-10">
+              <Link href="/shop" className="text-text-main/80 dark:text-white/80 text-[13px] font-semibold tracking-wider uppercase hover:text-primary transition-colors">Koleksi Sprei</Link>
+              <Link href="/our-story" className="text-text-main/80 dark:text-white/80 text-[13px] font-semibold tracking-wider uppercase hover:text-primary transition-colors">Cerita Kami</Link>
+              <Link href="/journal" className="text-text-main/80 dark:text-white/80 text-[13px] font-semibold tracking-wider uppercase hover:text-primary transition-colors">Jurnal & Tips</Link>
+              <Link href="/contact-us" className="text-text-main/80 dark:text-white/80 text-[13px] font-semibold tracking-wider uppercase hover:text-primary transition-colors">Hubungi Kami</Link>
             </div>
-
             {/* Icons */}
             <div className="flex items-center gap-2 sm:gap-4">
 
@@ -120,7 +120,7 @@ export default function Navbar() {
                 type="submit"
                 className="absolute right-2 bg-primary text-white px-6 py-2 rounded-full text-sm font-bold hover:bg-primary-dark transition-all shadow-md active:scale-95"
               >
-                Search
+                Cari
               </button>
             </form>
           </div>
@@ -133,26 +133,26 @@ export default function Navbar() {
         <div className="md:hidden fixed inset-0 top-[64px] sm:top-[80px] bg-white dark:bg-background-dark z-[60] flex flex-col animate-in fade-in slide-in-from-right duration-300">
           <div className="flex flex-col p-8 space-y-6">
             <Link href="/shop" onClick={() => setIsMobileMenuOpen(false)} className="group flex items-center justify-between py-2">
-              <span className="text-2xl font-bold text-text-main dark:text-white group-hover:text-primary transition-colors">Shop Bedding</span>
+              <span className="text-2xl font-bold text-text-main dark:text-white group-hover:text-primary transition-colors">Koleksi Sprei</span>
               <span className="material-symbols-outlined text-gray-300 group-hover:text-primary">arrow_forward</span>
             </Link>
             <Link href="/our-story" onClick={() => setIsMobileMenuOpen(false)} className="group flex items-center justify-between py-2">
-              <span className="text-2xl font-bold text-text-main dark:text-white group-hover:text-primary transition-colors">Our Story</span>
+              <span className="text-2xl font-bold text-text-main dark:text-white group-hover:text-primary transition-colors">Cerita Kami</span>
               <span className="material-symbols-outlined text-gray-300 group-hover:text-primary">arrow_forward</span>
             </Link>
             <Link href="/journal" onClick={() => setIsMobileMenuOpen(false)} className="group flex items-center justify-between py-2">
-              <span className="text-2xl font-bold text-text-main dark:text-white group-hover:text-primary transition-colors">Journal</span>
+              <span className="text-2xl font-bold text-text-main dark:text-white group-hover:text-primary transition-colors">Jurnal & Tips</span>
               <span className="material-symbols-outlined text-gray-300 group-hover:text-primary">arrow_forward</span>
             </Link>
             <Link href="/contact-us" onClick={() => setIsMobileMenuOpen(false)} className="group flex items-center justify-between py-2">
-              <span className="text-2xl font-bold text-text-main dark:text-white group-hover:text-primary transition-colors">Contact Us</span>
+              <span className="text-2xl font-bold text-text-main dark:text-white group-hover:text-primary transition-colors">Hubungi Kami</span>
               <span className="material-symbols-outlined text-gray-300 group-hover:text-primary">arrow_forward</span>
             </Link>
 
             <div className="pt-10 flex flex-col gap-4">
               <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="w-full bg-primary text-white py-4 rounded-full text-base font-bold flex items-center justify-center gap-3 shadow-lg active:scale-95 transition-all">
                 <span className="material-symbols-outlined">chat</span>
-                Consult via WhatsApp
+                Konsultasi via WhatsApp
               </a>
             </div>
           </div>

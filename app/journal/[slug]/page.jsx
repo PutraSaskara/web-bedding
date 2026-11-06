@@ -72,15 +72,18 @@ export async function generateMetadata({ params }) {
   const rawSiteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskarasprei.shop';
   const siteUrl = rawSiteUrl.replace(/\/+$/, '');
   const articleUrl = `${siteUrl}/journal/${encodeURIComponent(article.slug)}`;
+  const pageTitle = article.meta_title?.trim() ? article.meta_title : `${article.title} | Ameskara Journal`;
+  const pageDescription = article.meta_description?.trim() ? article.meta_description : (article.excerpt || '');
+
   return {
-    title: `${article.title} | Ameskara Journal`,
-    description: article.excerpt,
+    title: pageTitle,
+    description: pageDescription,
     alternates: {
       canonical: articleUrl,
     },
     openGraph: {
-      title: `${article.title} | Ameskara Journal`,
-      description: article.excerpt,
+      title: pageTitle,
+      description: pageDescription,
       url: articleUrl,
       type: 'article',
       images: article.thumbnail ? [article.thumbnail] : [],
@@ -93,6 +96,37 @@ export default async function ArticleDetailPage({ params }) {
 
   if (!article) notFound();
 
+  const rawSiteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskarasprei.shop';
+  const siteUrl = rawSiteUrl.replace(/\/+$/, '');
+  const articleUrl = `${siteUrl}/journal/${encodeURIComponent(article.slug)}`;
+
+  const articleJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: article.title,
+    description: article.excerpt || article.meta_description || '',
+    image: article.thumbnail ? [article.thumbnail] : [],
+    datePublished: article.created_at,
+    dateModified: article.updated_at || article.created_at,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': articleUrl,
+    },
+    author: {
+      '@type': 'Organization',
+      name: 'Ameskara Sprei',
+      url: siteUrl,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Ameskara Sprei',
+      logo: {
+        '@type': 'ImageObject',
+        url: `${siteUrl}/logo1.png`,
+      },
+    },
+  };
+
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('id-ID', {
       weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
@@ -101,6 +135,10 @@ export default async function ArticleDetailPage({ params }) {
 
   return (
     <div className="bg-white min-h-screen font-display text-text-main">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       <main>
           {/* Article Header */}
           <header className="max-w-4xl mx-auto px-4 pt-8 sm:pt-16 pb-4 sm:pb-8 text-center">

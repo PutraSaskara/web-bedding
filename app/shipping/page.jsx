@@ -1,19 +1,15 @@
 import React from 'react';
 
-const rawSiteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskarasprei.shop';
-const siteUrl = rawSiteUrl.replace(/\/+$/, '');
-export const metadata = {
-  title: 'Informasi Pengiriman',
-  description: 'Pengiriman produk Ameskara dari Bali (Denpasar) ke seluruh Indonesia. Ongkos kirim akan diinformasikan setelah pemesanan melalui WhatsApp.',
-  alternates: {
-    canonical: `${siteUrl}/shipping`,
-  },
-  openGraph: {
-    title: 'Informasi Pengiriman | Ameskara Sprei',
-    description: 'Pengiriman dari Bali (Denpasar). Ongkir dikonfirmasi setelah pemesanan via WhatsApp.',
-    url: `${siteUrl}/shipping`,
-  },
-};
+import { getSeoMetadata } from '../../lib/seo';
+
+export async function generateMetadata() {
+  return await getSeoMetadata(
+    'shipping',
+    'Informasi Ongkir & Pengiriman Sprei ke Seluruh Indonesia',
+    'Informasi lengkap tarif ongkir, ekspedisi terpercaya (JNE, J&T, SiCepat), dan estimasi waktu pengiriman sprei Ameskara dari Denpasar Bali ke seluruh Indonesia.',
+    '/shipping'
+  );
+}
 
 export default function ShippingPage() {
   return (

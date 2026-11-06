@@ -1,23 +1,56 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import ShopControls from './components/ShopControls';
+import { getSeoMetadata, SITE_URL } from '../../lib/seo';
 
-const rawSiteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskarasprei.shop';
-const siteUrl = rawSiteUrl.replace(/\/+$/, '');
+const siteUrl = SITE_URL;
 
-export const metadata = {
-  title: 'Belanja Sprei & Bedcover Premium',
-  description: 'Jelajahi koleksi lengkap sprei, bedcover, bantal, dan guling premium dari Ameskara. Tersedia berbagai motif, warna, dan ukuran dengan bahan lembut berkualitas tinggi.',
-  alternates: {
-    canonical: `${siteUrl}/shop`,
-  },
-  openGraph: {
-    title: 'Belanja Sprei & Bedcover Premium | Ameskara Sprei',
-    description: 'Jelajahi koleksi lengkap sprei, bedcover, bantal, dan guling premium dari Ameskara.',
-    url: `${siteUrl}/shop`,
-    type: 'website',
-  },
-};
+export async function generateMetadata({ searchParams }) {
+  const resolvedParams = searchParams ? await searchParams : {};
+  const category = resolvedParams?.category;
+
+  if (category) {
+    const formattedCategory = category.replace(/-/g, ' ').toUpperCase();
+    const title = `Koleksi Sprei & Bedcover ${formattedCategory} | Ameskara Bali`;
+    const description = `Jelajahi koleksi sprei dan bedcover premium pilihan untuk kategori ${formattedCategory}. Hadirkan kenyamanan tidur maksimal berkonsep slow living dari Ameskara Bali.`;
+    const path = `/shop?category=${encodeURIComponent(category)}`;
+
+    const baseMetadata = await getSeoMetadata(
+      'shop',
+      title,
+      description,
+      path
+    );
+
+    return {
+      ...baseMetadata,
+      title,
+      description,
+      alternates: {
+        ...baseMetadata?.alternates,
+        canonical: `${siteUrl}${path}`,
+      },
+      openGraph: {
+        ...baseMetadata?.openGraph,
+        title,
+        description,
+        url: `${siteUrl}${path}`,
+      },
+      twitter: {
+        ...baseMetadata?.twitter,
+        title,
+        description,
+      },
+    };
+  }
+
+  return await getSeoMetadata(
+    'shop',
+    'Katalog Sprei & Bedcover Katun Premium | Ameskara Bali',
+    'Koleksi sprei fitted, bedcover set, sarung bantal & guling katun premium Ameskara Bali. Ukuran 90x200 hingga 200x200 cm, adem & anti luntur. Beli via WhatsApp.',
+    '/shop'
+  );
+}
 
 // --- FETCH FUNCTIONS ---
 

@@ -25,20 +25,16 @@ async function getArticles() {
   }
 }
 
-const rawSiteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskarasprei.shop';
-const siteUrl = rawSiteUrl.replace(/\/+$/, '');
-export const metadata = {
-  title: "Journal - Tips Tidur & Inspirasi Dekorasi",
-  description: "Baca artikel tips tidur nyenyak, inspirasi dekorasi kamar tidur, dan panduan perawatan sprei dari Ameskara. Update rutin untuk kenyamanan tidur Anda.",
-  alternates: {
-    canonical: `${siteUrl}/journal`,
-  },
-  openGraph: {
-    title: 'Journal - Tips Tidur & Inspirasi Dekorasi | Ameskara Sprei',
-    description: 'Baca artikel tips tidur nyenyak, inspirasi dekorasi kamar tidur, dan panduan perawatan sprei dari Ameskara.',
-    url: `${siteUrl}/journal`,
-  },
-};
+import { getSeoMetadata } from '../../lib/seo';
+
+export async function generateMetadata() {
+  return await getSeoMetadata(
+    'journal',
+    'Tips Tidur Nyenyak & Perawatan Sprei | Ameskara Journal',
+    'Kumpulan panduan merawat kain sprei agar awet lembut, tips tidur nyenyak, dan inspirasi dekorasi kamar tidur estetik dari Ameskara Sprei Bali. Baca sekarang!',
+    '/journal'
+  );
+}
 
 export default async function JournalPage() {
   const articles = await getArticles();

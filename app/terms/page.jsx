@@ -1,4 +1,14 @@
 import React from 'react';
+import { getSeoMetadata } from '../../lib/seo';
+
+export async function generateMetadata() {
+  return await getSeoMetadata(
+    'terms',
+    'Syarat & Ketentuan Pembelian Sprei | Ameskara Bali',
+    'Ketentuan pemesanan, jaminan keaslian produk, kebijakan penukaran barang cacat produksi, dan panduan transaksi aman di Ameskara Sprei Bed and Linen Bali.',
+    '/terms'
+  );
+}
 
 export default function TermsPage() {
   return (

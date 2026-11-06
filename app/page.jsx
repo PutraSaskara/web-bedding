@@ -1,23 +1,18 @@
 import Link from "next/link";
 import Image from "next/image";
+import { getSeoMetadata, SITE_URL } from "../lib/seo";
 
-const rawSiteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ameskarasprei.shop';
-const siteUrl = rawSiteUrl.replace(/\/+$/, '');
-// SEO Metadata for Home Page
-export const metadata = {
-  title: 'Ameskara Sprei - Sprei & Bedcover Premium Berkualitas Tinggi',
-  description: 'Belanja sprei, bedcover, dan perlengkapan tidur premium dari Ameskara. Bahan lembut, warna tidak luntur, desain estetik. Gratis ongkir seluruh Indonesia.',
-  alternates: {
-    canonical: siteUrl,
-  },
-  openGraph: {
-    title: 'Ameskara Sprei - Sprei & Bedcover Premium Berkualitas Tinggi',
-    description: 'Belanja sprei, bedcover, dan perlengkapan tidur premium dari Ameskara. Bahan lembut, warna tidak luntur, desain estetik.',
-    url: siteUrl,
-    type: 'website',
-  },
-};
+const siteUrl = SITE_URL;
 
+// SEO & GEO Metadata dinamis yang dikelola dari Dashboard
+export async function generateMetadata() {
+  return await getSeoMetadata(
+    'home',
+    'Ameskara Sprei Bali | Sprei & Bedcover Katun Lembut Premium',
+    'Produsen sprei & bedcover premium di Bali. Bahan katun adem, lembut, warna anti luntur, pas di kasur. Melayani pengiriman ke seluruh Indonesia. Cek koleksinya!',
+    ''
+  );
+}
 // JSON-LD Structured Data
 function HomeJsonLd() {
   const jsonLd = {
