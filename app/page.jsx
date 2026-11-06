@@ -348,7 +348,7 @@ export default async function Home() {
               <p className="text-text-soft dark:text-gray-400 text-base sm:text-xl">
                 Bagikan momen nyaman Anda bersama kami. Tag{' '}
                 <a
-                  href="https://www.instagram.com/reel/DXrb6VjgrtU/?cplk=MXRzcjB6N3RxZGRqeA=="
+                  href="https://www.instagram.com/ameskarasprei.shop"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-primary font-bold hover:underline"
@@ -368,7 +368,7 @@ export default async function Home() {
               ].map((img, i) => (
                 <a
                   key={i}
-                  href="https://www.instagram.com/reel/DXrb6VjgrtU/?cplk=MXRzcjB6N3RxZGRqeA=="
+                  href="https://www.instagram.com/ameskarasprei.shop"
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`relative group overflow-hidden rounded-3xl shadow-soft block ${img.span}`}

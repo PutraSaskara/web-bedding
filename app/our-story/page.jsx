@@ -16,36 +16,6 @@ export default function OurStoryPage() {
   return (
     <div className="flex flex-col min-h-screen font-display text-text-main bg-background-light">
       
-      {/* --- Top Navigation (Copy dari Home agar konsisten) --- */}
-      {/* <nav className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-[#f4f2f0]">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 sm:h-20">
-            <Link href="/" className="flex items-center gap-2 text-text-main group cursor-pointer hover:opacity-80">
-              <span className="material-symbols-outlined text-3xl text-primary">bed</span>
-              <h2 className="text-xl font-bold tracking-tight">Nyamann</h2>
-            </Link>
-
-            <div className="hidden md:flex items-center gap-8">
-              <Link href="/shop" className="text-text-main text-sm font-medium hover:text-primary transition-colors">Shop Bedding</Link>
-              <Link href="/our-story" className="text-primary text-sm font-bold transition-colors">Our Story</Link>
-              <Link href="#" className="text-text-main text-sm font-medium hover:text-primary transition-colors">Journal</Link>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <Link href="/shop" className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-black/5 transition-colors text-text-main">
-                <span className="material-symbols-outlined text-[20px]">search</span>
-              </Link>
-              <button className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-black/5 transition-colors text-text-main">
-                <span className="material-symbols-outlined text-[20px]">shopping_bag</span>
-              </button>
-              <button className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-black/5 transition-colors text-text-main">
-                <span className="material-symbols-outlined text-[20px]">menu</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav> */}
-
       <main className="flex-grow">
         
         {/* --- Hero Section (Simple & Elegant) --- */}
@@ -176,7 +146,7 @@ export default function OurStoryPage() {
         <section className="py-12 sm:py-20 bg-primary text-white text-center px-4">
              <div className="max-w-2xl mx-auto space-y-5 sm:space-y-8">
                  <h2 className="text-2xl sm:text-3xl md:text-5xl font-black leading-tight">Siap untuk tidur lebih nyenyak?</h2>
-                 <p className="text-white/90 text-sm sm:text-lg">Rasakan perbedaan tidur dengan linen organik hari ini.</p>
+                 <p className="text-white/90 text-sm sm:text-lg">Rasakan kenyamanan tidur dengan sprei premium Ameskara hari ini.</p>
                  <Link href="/shop" className="inline-block bg-white text-primary px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg hover:bg-gray-100 transition-colors shadow-lg active:scale-95">
                     Shop Collection
                  </Link>

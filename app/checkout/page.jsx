@@ -51,7 +51,7 @@ export default function CheckoutPage() {
     // Format: Kode negara (62) tanpa tanda plus. Contoh: 628123456789
     const ownerPhoneNumber = "6285739287239";
 
-    // Ambil domain website saat ini (misal: https://nyamann.com atau http://localhost:3000)
+    // Ambil domain website saat ini (misal: https://www.ameskarasprei.shop atau http://localhost:3000)
     const origin = window.location.origin;
 
     // 3. Susun List Produk

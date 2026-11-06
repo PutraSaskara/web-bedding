@@ -31,11 +31,19 @@ export default function ContactUsPage() {
                 <p className="flex items-center gap-2">
                   <span className="font-medium">Email:</span> dewatashop182@gmail.com
                 </p>
-                {/* <p className="flex items-center gap-2">
-                  <span className="font-medium">WhatsApp:</span> +62 812-3456-7890
-                </p> */}
                 <p className="flex items-center gap-2">
-                  <span className="font-medium">Jam Kerja:</span> Senin - Jumat, 09:00 - 17:00 WIB
+                  <span className="font-medium">WhatsApp:</span>{' '}
+                  <a 
+                    href="https://wa.me/6285739287239" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="text-primary hover:underline font-medium"
+                  >
+                    +62 857-3928-7239
+                  </a>
+                </p>
+                <p className="flex items-center gap-2">
+                  <span className="font-medium">Jam Kerja:</span> Senin - Jumat, 09:00 - 17:00 WITA
                 </p>
               </div>
             </div>
