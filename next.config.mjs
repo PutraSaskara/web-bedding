@@ -45,6 +45,15 @@ const nextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: '/shop/fata-only-sprei-quenn-rumbai',
+        destination: '/shop/fata-only-sprei-queen-rumbai',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

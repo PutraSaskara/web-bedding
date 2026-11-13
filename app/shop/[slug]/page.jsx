@@ -88,7 +88,22 @@ export async function generateMetadata({ params }) {
 
   // Jika produk ditemukan, buat metadata yang kaya & dinamis
   const productUrl = `${siteUrl}/shop/${encodeURIComponent(product.slug)}`;
-  const productDescription = product.meta_description || product.description?.substring(0, 160) || sharedMetadata.description;
+  let productDescription = '';
+  if (product.meta_description && product.meta_description.trim()) {
+    productDescription = product.meta_description.trim();
+  } else if (product.description && product.description.trim()) {
+    const stripped = product.description
+      .replace(/<[^>]*>/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+    if (stripped) {
+      productDescription = stripped.length > 155 ? stripped.slice(0, 155).trim() : stripped;
+    }
+  }
+
+  if (!productDescription) {
+    productDescription = `Beli ${product.name} kualitas premium bahan katun adem & lembut di Ameskara Bali. Tersedia berbagai ukuran dan motif pilihan. Kirim ke seluruh Indonesia.`;
+  }
   const rawImages = product.banner_image ? [product.banner_image] : sharedMetadata.openGraph.images.map(img => img.url);
   const productImages = rawImages.filter(img => typeof img === 'string' && img.startsWith('http'));
 

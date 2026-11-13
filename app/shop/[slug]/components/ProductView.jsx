@@ -181,6 +181,7 @@ export default function ProductView({ product }) {
           {/* --- 3. TOMBOL SHARE (BARU) --- */}
              {/* TOMBOL SHARE YANG CLEAN */}
              <button 
+                data-nosnippet
                 onClick={handleShare}
                 className="group flex items-center gap-2 px-3 py-1.5 rounded-full hover:bg-gray-100 transition-all text-text-soft hover:text-text-main"
                 title="Bagikan Produk"
@@ -204,6 +205,7 @@ export default function ProductView({ product }) {
       {/* ========================================= */}
       {/* Muncul di tengah bawah layar, fixed position */}
       <div 
+        data-nosnippet
         className={`fixed bottom-10 left-1/2 -translate-x-1/2 z-[150] transition-all duration-300 transform ${
             showToast ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
         }`}
@@ -216,7 +218,7 @@ export default function ProductView({ product }) {
         </div>
       </div>
 
-          <div className="space-y-5 sm:space-y-6">
+          <div data-nosnippet className="space-y-5 sm:space-y-6">
             {/* Color Selector */}
             {variants.length > 0 && (
               <div>
