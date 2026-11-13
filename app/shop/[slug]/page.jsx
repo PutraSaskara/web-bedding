@@ -140,6 +140,18 @@ export default async function ProductDetailPage({ params }) {
   const rawImages = product.banner_image ? [product.banner_image] : [];
   const validImages = rawImages.filter(img => typeof img === 'string' && img.startsWith('http'));
 
+  let validFromDate = '2024-01-01';
+  try {
+    if (product.created_at) {
+      const d = new Date(product.created_at);
+      if (!isNaN(d.getTime())) {
+        validFromDate = d.toISOString().split('T')[0];
+      }
+    }
+  } catch {
+    validFromDate = '2024-01-01';
+  }
+
   // JSON-LD Product Structured Data (Google Merchant & Search Rich Results)
   const productJsonLd = {
     '@context': 'https://schema.org',
@@ -161,6 +173,7 @@ export default async function ProductDetailPage({ params }) {
       priceCurrency: 'IDR',
       price: Number(product.price),
       priceValidUntil: '2028-12-31',
+      validFrom: validFromDate,
       itemCondition: 'https://schema.org/NewCondition',
       availability: product.stock > 0
         ? 'https://schema.org/InStock'
